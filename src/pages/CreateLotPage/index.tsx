@@ -10,13 +10,14 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { DateTimePicker } from '@mui/x-date-pickers';
+
+import PictureWall from '../../components/common/PictureWall';
 import {
   AUCTION_DURATIONS_IN_DAYS,
   CATEGORIES,
   INPUT_PROPS,
 } from '../../helpers/constants.ts';
-import { DateTimePicker } from '@mui/x-date-pickers';
-import PictureWall from '../../components/common/PictureWall';
 
 export const CreateLotPage: React.FC = () => {
   return (
