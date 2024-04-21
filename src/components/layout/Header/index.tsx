@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { Link as RouterLink } from 'react-router-dom';
 import {
@@ -26,10 +26,7 @@ interface IHeader {}
 const Header: React.FC<IHeader> = () => {
   const dispatch = useAppDispatch();
   const theme = useAppSelector((state) => state.uiReducer.theme);
-  console.log('header render');
-  useEffect(() => {
-    console.log('header render eff');
-  }, []);
+
   return (
     <AppBar position="fixed">
       <Toolbar variant="dense">

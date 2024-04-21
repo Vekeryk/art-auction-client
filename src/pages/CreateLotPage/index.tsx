@@ -20,7 +20,7 @@ import PictureWall from '../../components/common/PictureWall';
 
 export const CreateLotPage: React.FC = () => {
   return (
-    <Card>
+    <Card sx={{ padding: 2 }} elevation={2}>
       <CardContent>
         <Typography variant="h5" component="div">
           Створення лота

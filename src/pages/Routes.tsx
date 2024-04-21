@@ -7,7 +7,13 @@ import {
 } from 'react-router-dom';
 
 import Layout from '../components/layout/Layout';
-import { HomePage, LotPage, SearchPage, CreateLotPage } from './index.ts';
+import {
+  HomePage,
+  LotPage,
+  SearchPage,
+  CreateLotPage,
+  AboutPage,
+} from './index.ts';
 import { NAVIGATE_PATH as PATH } from '../helpers/constants.ts';
 
 const router = createBrowserRouter(
@@ -15,9 +21,9 @@ const router = createBrowserRouter(
     <Route element={<Layout />}>
       <Route path={PATH.home} element={<HomePage />} />
       <Route path={PATH.lot} element={<LotPage />} />
-      <Route path={PATH.createLot} element={<CreateLotPage />} />
       <Route path={PATH.search} element={<SearchPage />} />
-      <Route path={PATH.aboutUs} element={<LotPage />} />
+      <Route path={PATH.createLot} element={<CreateLotPage />} />
+      <Route path={PATH.aboutUs} element={<AboutPage />} />
       <Route path={PATH.any} element={<Navigate to={PATH.home} />} />
     </Route>,
   ),
