@@ -15,13 +15,37 @@ export type BaseUser = {
   createdAt: string;
 };
 
+export type TimeLeft = {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+  difference: number;
+};
+
+export type Tag = {
+  id: string;
+  name: string;
+};
+
+export type Category = {
+  id: string;
+  name: string;
+};
+
+export type LotImage = {
+  id: string;
+  index: number;
+  imageUrl: string;
+};
+
 export type Lot = {
   id: string;
   name: string;
   description: string;
-  category: string;
-  tags: string[];
-  images: string[];
+  category: Category;
+  tags: Tag[];
+  images: LotImage[];
   startPrice: number;
   currentPrice: number;
   startTime: string;

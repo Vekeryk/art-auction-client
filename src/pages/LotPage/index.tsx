@@ -1,17 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import {
-  Box,
-  Button,
-  Paper,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material';
+import { Box, Paper, Stack } from '@mui/material';
 
 import { Lot } from '../../types.ts';
 import Gallery from '../../components/common/Gallery';
 import LotTabs from '../../components/common/LotTabs';
+import LotDetails from '../../components/common/LotDetails';
 
 export const LotPage: React.FC = () => {
   const lot: Lot = {
@@ -19,13 +13,21 @@ export const LotPage: React.FC = () => {
     name: 'Вінтажний Живопис (картина)',
     description:
       'Цей оригінальний живопис середини 20 століття, підписаний художником, є відмінним прикладом європейського мистецтва того періоду.',
-    category: 'Живопис',
-    tags: ['вінтаж', 'Європа', '20 століття', 'олія'],
-    images: ['src/assets/images/cool3.jpg', 'src/assets/images/duck3.jpg'],
+    category: { id: '1', name: 'Живопис' },
+    tags: [
+      { id: '1', name: 'вінтаж' },
+      { id: '2', name: 'Європа' },
+      { id: '3', name: '20 століття' },
+      { id: '4', name: 'олія' },
+    ],
+    images: [
+      { id: '1', index: 1, imageUrl: 'src/assets/images/cool3.jpg' },
+      { id: '2', index: 2, imageUrl: 'src/assets/images/duck3.jpg' },
+    ],
     startPrice: 2000,
     currentPrice: 2500,
-    startTime: '2023-04-15T09:00:00Z',
-    endTime: '2023-04-22T12:00:00Z',
+    startTime: '2024-04-15T09:00:00Z',
+    endTime: '2024-04-27T10:00:00Z',
     comments: [
       {
         id: '1',
@@ -100,57 +102,16 @@ export const LotPage: React.FC = () => {
     updatedAt: '2023-04-14T23:59:59Z',
   };
 
-  const [bidAmount, setBidAmount] = useState(lot.currentPrice);
-
-  const handleBidSubmit = () => {
-    // Add logic to submit bid
-    console.log(`Submitting bid: ${bidAmount} for lot ${lot.id}`);
-  };
-
-  // к-ть людей переглядає
   return (
     <Stack spacing={3}>
-      <Typography variant="h4">{lot.name}</Typography>
-
       <Paper sx={{ padding: 2 }} elevation={2}>
         <Stack direction="row" spacing={2} flexGrow={1}>
           <Box sx={{ width: '50%' }}>
             <Gallery images={lot.images} />
           </Box>
-          <Stack spacing={2} flexGrow={1}>
-            <Typography variant="h6" sx={{ mt: 1 }}>
-              Поточна ціна: ${lot.currentPrice}
-            </Typography>
-            <Stack
-              direction="row"
-              spacing={2}
-              component="form"
-              sx={{ mt: 2 }}
-              width="100%"
-            >
-              <TextField
-                label="Ваша ставка"
-                type="number"
-                value={bidAmount}
-                onChange={(e) => setBidAmount(+e.target.value)}
-                InputProps={{
-                  inputProps: { min: lot.currentPrice + 20, max: 100000000 },
-                }}
-                fullWidth
-              />
-              <Button
-                onClick={handleBidSubmit}
-                variant="contained"
-                color="primary"
-                sx={{ mt: 2 }}
-              >
-                Зробити ставку
-              </Button>
-            </Stack>
-          </Stack>
+          <LotDetails lot={lot} />
         </Stack>
       </Paper>
-
       <Paper>
         <LotTabs lot={lot} />
       </Paper>

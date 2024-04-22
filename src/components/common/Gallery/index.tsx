@@ -2,9 +2,10 @@ import React from 'react';
 
 import Carousel from 'react-material-ui-carousel';
 import { Box } from '@mui/material';
+import { LotImage } from '../../../types.ts';
 
 interface IGallery {
-  images: string[];
+  images: LotImage[];
 }
 
 const Gallery: React.FC<IGallery> = ({ images }) => {
@@ -16,14 +17,14 @@ const Gallery: React.FC<IGallery> = ({ images }) => {
       autoPlay={false}
       sx={{ width: 500 }}
     >
-      {images.map((image, index) => (
+      {images.map((image) => (
         <Box
           sx={{ width: 500, height: 500, backgroundColor: 'gray' }}
-          key={index}
+          key={image.id}
         >
           <img
             style={{ width: 500, height: 500, objectFit: 'contain' }}
-            src={image}
+            src={image.imageUrl}
             role="presentation"
             alt=""
           />
