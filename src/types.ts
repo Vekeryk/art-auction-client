@@ -6,6 +6,13 @@ export type ImagePreview = {
   title: string;
 };
 
+export type CurrentUser = {
+  username: string;
+  firstName?: string;
+  lastName?: string;
+  profilePictureUrl?: string;
+};
+
 export type BaseUser = {
   id: string;
   username: string;

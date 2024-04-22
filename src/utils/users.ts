@@ -1,4 +1,13 @@
 import { BaseUser } from '../types.ts';
+import keycloak from './keycloak.ts';
+
+export const authenticatedAction = (callback: () => void) => {
+  if (keycloak.authenticated) {
+    callback();
+  } else {
+    keycloak.login();
+  }
+};
 
 export const getUserName = (user: BaseUser) => {
   const { username, firstName, lastName } = user;

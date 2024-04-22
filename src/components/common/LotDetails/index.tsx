@@ -10,6 +10,7 @@ import SellIcon from '@mui/icons-material/Sell';
 import Timer from '../Timer';
 import CategoryAndTags from '../CategoryAndTags';
 import IconContainer from '../IconContainer';
+import { authenticatedAction } from '../../../utils/users.ts';
 import { Lot } from '../../../types.ts';
 
 interface ILotDetails {
@@ -32,7 +33,7 @@ const LotDetails: React.FC<ILotDetails> = ({ lot }) => {
           <IconContainer>
             <SellIcon />
             <Typography variant="h6">
-              Поточна ціна: {lot.currentPrice}
+              Поточна ціна: {lot.currentPrice} грн.
             </Typography>
           </IconContainer>
           <IconContainer>
@@ -56,7 +57,7 @@ const LotDetails: React.FC<ILotDetails> = ({ lot }) => {
             }}
           />
           <Button
-            onClick={handleBidSubmit}
+            onClick={() => authenticatedAction(handleBidSubmit)}
             variant="contained"
             color="primary"
             startIcon={<GavelIcon />}

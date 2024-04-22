@@ -23,6 +23,7 @@ export const LotPage: React.FC = () => {
     images: [
       { id: '1', index: 1, imageUrl: 'src/assets/images/cool3.jpg' },
       { id: '2', index: 2, imageUrl: 'src/assets/images/duck3.jpg' },
+      { id: '2', index: 2, imageUrl: 'src/assets/images/bear4.jpg' },
     ],
     startPrice: 2000,
     currentPrice: 2500,

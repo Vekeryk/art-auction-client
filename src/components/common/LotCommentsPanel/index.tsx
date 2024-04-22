@@ -14,7 +14,7 @@ import {
 
 import { LotComment } from './../../../types';
 import { toDateTimeString } from '../../../utils/dates.ts';
-import { getUserName } from '../../../utils/users.ts';
+import { authenticatedAction, getUserName } from '../../../utils/users.ts';
 
 interface ILotCommentsPanel {
   comments: LotComment[];
@@ -62,7 +62,12 @@ const LotCommentsPanel: React.FC<ILotCommentsPanel> = ({
         </Typography>
       )}
       <Stack alignItems="center" marginY={2}>
-        <Button variant="contained">Додати коментар</Button>
+        <Button
+          variant="contained"
+          onClick={() => authenticatedAction(() => {})}
+        >
+          Додати коментар
+        </Button>
       </Stack>
     </div>
   );

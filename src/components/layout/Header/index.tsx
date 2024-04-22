@@ -9,6 +9,7 @@ import {
   Button,
   IconButton,
   Link,
+  Stack,
   Toolbar,
   Typography,
 } from '@mui/material';
@@ -20,12 +21,14 @@ import MenuIcon from '@mui/icons-material/Menu';
 import useAppSelector from '../../../hooks/useAppSelector.ts';
 import useAppDispatch from '../../../hooks/useAppDispatch.ts';
 import { toggleTheme } from '../../../store/reducers/uiSlice.ts';
+import keycloak from '../../../utils/keycloak.ts';
 
 interface IHeader {}
 
 const Header: React.FC<IHeader> = () => {
   const dispatch = useAppDispatch();
   const theme = useAppSelector((state) => state.uiReducer.theme);
+  const user = useAppSelector((state) => state.userReducer.user);
 
   return (
     <AppBar position="fixed">
@@ -52,38 +55,46 @@ const Header: React.FC<IHeader> = () => {
             Лоти
           </Button>
         </Box>
-        <Breadcrumbs sx={{ marginX: 2, color: 'white' }}>
-          <Link
-            underline="hover"
-            color="inherit"
-            component={RouterLink}
-            to="/login"
-          >
-            Вхід
-          </Link>
-          <Link
-            underline="hover"
-            color="inherit"
-            component={RouterLink}
-            to="/register"
-          >
-            Реєстрація
-          </Link>
-        </Breadcrumbs>
-        <IconButton
-          size="large"
-          edge="end"
-          aria-label="account"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <IconButton size="large" aria-label="17 notifications" color="inherit">
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
+        {user ? (
+          <Stack direction="row">
+            <IconButton
+              size="large"
+              edge="end"
+              aria-label="account"
+              aria-haspopup="true"
+              color="inherit"
+            >
+              <AccountCircle />
+            </IconButton>
+            <IconButton
+              size="large"
+              aria-label="17 notifications"
+              color="inherit"
+            >
+              <Badge badgeContent={17} color="error">
+                <NotificationsIcon />
+              </Badge>
+            </IconButton>
+          </Stack>
+        ) : (
+          <Breadcrumbs sx={{ marginX: 2, color: 'white', cursor: 'pointer' }}>
+            <Link
+              underline="hover"
+              color="inherit"
+              onClick={() => keycloak.login()}
+            >
+              Вхід
+            </Link>
+            <Link
+              underline="hover"
+              color="inherit"
+              onClick={() => keycloak.register()}
+            >
+              Реєстрація
+            </Link>
+          </Breadcrumbs>
+        )}
+
         <IconButton color="inherit" onClick={() => dispatch(toggleTheme())}>
           {theme === 'dark' ? <LightMode /> : <DarkModeOutlined />}
         </IconButton>
