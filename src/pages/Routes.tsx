@@ -23,7 +23,7 @@ const router = createBrowserRouter(
       <Route path={PATH.lot} element={<LotPage />} />
       <Route path={PATH.search} element={<SearchPage />} />
       <Route path={PATH.createLot} element={<CreateLotPage />} />
-      <Route path={PATH.aboutUs} element={<AboutPage />} />
+      <Route path={PATH.about} element={<AboutPage />} />
       <Route path={PATH.any} element={<Navigate to={PATH.home} />} />
     </Route>,
   ),

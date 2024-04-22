@@ -8,8 +8,12 @@ import {
   CardContent,
   CardMedia,
   Grid,
+  Stack,
   Typography,
 } from '@mui/material';
+import { Link } from 'react-router-dom';
+
+import { NAVIGATE_PATH } from '../../helpers/constants.ts';
 
 const featuredAuctions = [
   {
@@ -115,7 +119,7 @@ export const HomePage: React.FC = () => {
           gap: 3,
         }}
       >
-        <Box>
+        <Stack>
           <Typography variant="h4" component="h1" gutterBottom>
             Ласкаво просимо на Арт Аукціон!
           </Typography>
@@ -127,14 +131,19 @@ export const HomePage: React.FC = () => {
             Як це працює?
           </Typography>
           <Typography paragraph>
-            Зареєструйтеся, додайте свій платіжний метод, і ви готові брати
-            участь в аукціонах! Відслідковуйте улюблені лоти та ставте ставки в
-            реальному часі.
+            Зареєструйтеся і ви готові брати участь в аукціонах! Відслідковуйте
+            цікаві лоти та робіть ставки в реальному часі.
           </Typography>
-          <Button variant="contained" color="primary">
-            Дізнатись більше
+          <Button
+            variant="outlined"
+            color="primary"
+            sx={{ alignSelf: 'start' }}
+            component={Link}
+            to={NAVIGATE_PATH.about}
+          >
+            Дізнатися більше
           </Button>
-        </Box>
+        </Stack>
         <Box
           sx={{
             width: '100%',

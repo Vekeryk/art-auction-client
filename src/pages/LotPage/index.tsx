@@ -1,18 +1,17 @@
+import React, { useState } from 'react';
+
 import {
   Box,
   Button,
-  Card,
-  CardMedia,
-  Divider,
-  List,
-  ListItem,
   Paper,
   Stack,
   TextField,
   Typography,
 } from '@mui/material';
-import React, { useState } from 'react';
+
 import { Lot } from '../../types.ts';
+import Gallery from '../../components/common/Gallery';
+import LotTabs from '../../components/common/LotTabs';
 
 export const LotPage: React.FC = () => {
   const lot: Lot = {
@@ -22,10 +21,7 @@ export const LotPage: React.FC = () => {
       'Цей оригінальний живопис середини 20 століття, підписаний художником, є відмінним прикладом європейського мистецтва того періоду.',
     category: 'Живопис',
     tags: ['вінтаж', 'Європа', '20 століття', 'олія'],
-    images: [
-      'https://picsum.photos/700/1100',
-      'https://picsum.photos/1200/500',
-    ],
+    images: ['src/assets/images/cool3.jpg', 'src/assets/images/duck3.jpg'],
     startPrice: 2000,
     currentPrice: 2500,
     startTime: '2023-04-15T09:00:00Z',
@@ -39,10 +35,35 @@ export const LotPage: React.FC = () => {
           username: 'artlover',
           firstName: 'Олексій',
           lastName: 'Кравчук',
-          profilePictureUrl: 'https://via.placeholder.com/150',
+          profilePictureUrl: 'https://mui.com/static/images/avatar/2.jpg',
           createdAt: '2023-03-01T08:30:00Z',
         },
         createdAt: '2023-04-16T10:00:00Z',
+      },
+      {
+        id: '2',
+        content: 'Дуже гарна картина!',
+        user: {
+          id: '1',
+          username: 'user1',
+          firstName: 'Олександр',
+          lastName: 'Іванов',
+          profilePictureUrl: 'https://mui.com/static/images/avatar/1.jpg',
+          createdAt: '2024-04-20T10:00:00',
+        },
+        createdAt: '2024-04-21T10:30:00',
+      },
+      {
+        id: '3',
+        content: 'На фото стан не дуже',
+        user: {
+          id: '8',
+          username: 'vekeryk',
+          firstName: 'Векерик',
+          lastName: 'Денис',
+          createdAt: '2024-04-20T10:00:00',
+        },
+        createdAt: '2024-04-21T10:30:00',
       },
     ],
     bids: [
@@ -54,7 +75,7 @@ export const LotPage: React.FC = () => {
           username: 'collector123',
           firstName: 'Марія',
           lastName: 'Бондаренко',
-          profilePictureUrl: 'https://via.placeholder.com/150',
+          profilePictureUrl: 'https://mui.com/static/images/avatar/3.jpg',
           createdAt: '2023-01-20T07:25:00Z',
         },
         createdAt: '2023-04-15T12:30:00Z',
@@ -67,7 +88,7 @@ export const LotPage: React.FC = () => {
           username: 'vintageFan',
           firstName: 'Сергій',
           lastName: 'Петров',
-          profilePictureUrl: 'https://via.placeholder.com/150',
+          profilePictureUrl: 'https://mui.com/static/images/avatar/1.jpg',
           createdAt: '2023-02-11T11:00:00Z',
         },
         createdAt: '2023-04-16T15:45:00Z',
@@ -79,89 +100,60 @@ export const LotPage: React.FC = () => {
     updatedAt: '2023-04-14T23:59:59Z',
   };
 
-  const [bidAmount, setBidAmount] = useState('');
+  const [bidAmount, setBidAmount] = useState(lot.currentPrice);
 
   const handleBidSubmit = () => {
     // Add logic to submit bid
     console.log(`Submitting bid: ${bidAmount} for lot ${lot.id}`);
-    setBidAmount('');
   };
 
+  // к-ть людей переглядає
   return (
     <Stack spacing={3}>
-      <Paper></Paper>
       <Typography variant="h4">{lot.name}</Typography>
-      <Typography variant="body1" sx={{ mt: 2 }}>
-        {lot.description}
-      </Typography>
-      <Typography variant="h6" sx={{ mt: 1 }}>
-        Starting Price: ${lot.startPrice}
-      </Typography>
-      <Typography variant="h6" sx={{ mt: 1 }}>
-        Current Price: ${lot.currentPrice}
-      </Typography>
-      <Box sx={{ mt: 2 }}>
-        {lot.images.map((image, index) => (
-          <Card
-            key={index}
-            sx={{ maxWidth: 345, display: 'inline-block', m: 1 }}
-          >
-            <CardMedia
-              component="img"
-              height="200"
-              image={image}
-              alt={`Image ${index + 1}`}
-            />
-          </Card>
-        ))}
-      </Box>
-      <Box component="form" sx={{ mt: 2 }}>
-        <TextField
-          label="Your Bid"
-          type="number"
-          value={bidAmount}
-          onChange={(e) => setBidAmount(e.target.value)}
-          fullWidth
-        />
-        <Button
-          onClick={handleBidSubmit}
-          variant="contained"
-          color="primary"
-          sx={{ mt: 2 }}
-        >
-          Place Bid
-        </Button>
-      </Box>
-      <Typography variant="h5" sx={{ mt: 4 }}>
-        Bids
-      </Typography>
-      <List>
-        {lot.bids.map((bid) => (
-          <ListItem key={bid.id}>
-            <Typography>
-              {bid.user.username}: ${bid.amount}
+
+      <Paper sx={{ padding: 2 }} elevation={2}>
+        <Stack direction="row" spacing={2} flexGrow={1}>
+          <Box sx={{ width: '50%' }}>
+            <Gallery images={lot.images} />
+          </Box>
+          <Stack spacing={2} flexGrow={1}>
+            <Typography variant="h6" sx={{ mt: 1 }}>
+              Поточна ціна: ${lot.currentPrice}
             </Typography>
-          </ListItem>
-        ))}
-      </List>
-      <Typography variant="h5" sx={{ mt: 4 }}>
-        Comments
-      </Typography>
-      <List>
-        {lot.comments.map((comment) => (
-          <React.Fragment key={comment.id}>
-            <ListItem alignItems="flex-start">
-              <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-                <Typography variant="subtitle2">
-                  {comment.user.username}
-                </Typography>
-                <Typography variant="body2">{comment.content}</Typography>
-              </Box>
-            </ListItem>
-            <Divider variant="inset" component="li" />
-          </React.Fragment>
-        ))}
-      </List>
+            <Stack
+              direction="row"
+              spacing={2}
+              component="form"
+              sx={{ mt: 2 }}
+              width="100%"
+            >
+              <TextField
+                label="Ваша ставка"
+                type="number"
+                value={bidAmount}
+                onChange={(e) => setBidAmount(+e.target.value)}
+                InputProps={{
+                  inputProps: { min: lot.currentPrice + 20, max: 100000000 },
+                }}
+                fullWidth
+              />
+              <Button
+                onClick={handleBidSubmit}
+                variant="contained"
+                color="primary"
+                sx={{ mt: 2 }}
+              >
+                Зробити ставку
+              </Button>
+            </Stack>
+          </Stack>
+        </Stack>
+      </Paper>
+
+      <Paper>
+        <LotTabs lot={lot} />
+      </Paper>
     </Stack>
   );
 };

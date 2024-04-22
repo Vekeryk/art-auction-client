@@ -3,7 +3,7 @@ export const NAVIGATE_PATH = {
   lot: '/lot',
   search: '/search',
   createLot: '/create-lot',
-  aboutUs: '/about',
+  about: '/about',
   any: '*',
 };
 

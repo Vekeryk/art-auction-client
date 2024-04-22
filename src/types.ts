@@ -9,9 +9,9 @@ export type ImagePreview = {
 export type BaseUser = {
   id: string;
   username: string;
-  firstName: string;
-  lastName: string;
-  profilePictureUrl: string;
+  firstName?: string;
+  lastName?: string;
+  profilePictureUrl?: string;
   createdAt: string;
 };
 
@@ -26,7 +26,7 @@ export type Lot = {
   currentPrice: number;
   startTime: string;
   endTime: string;
-  comments: Comment[];
+  comments: LotComment[];
   bids: Bid[];
   paymentMethods: string[];
   deliveryMethods: string[];
@@ -41,7 +41,7 @@ export type Bid = {
   createdAt: string;
 };
 
-export type Comment = {
+export type LotComment = {
   id: string;
   content: string;
   user: BaseUser;
