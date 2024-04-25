@@ -7,9 +7,9 @@ import GroupsIcon from '@mui/icons-material/Groups';
 import GavelIcon from '@mui/icons-material/Gavel';
 import SellIcon from '@mui/icons-material/Sell';
 
-import Timer from '../Timer';
-import CategoryAndTags from '../CategoryAndTags';
-import IconContainer from '../IconContainer';
+import Timer from '../../common/Timer';
+import CategoryAndTags from '../../common/CategoryAndTags';
+import IconContainer from '../../common/IconContainer';
 import { authenticatedAction } from '../../../utils/users.ts';
 import { Lot } from '../../../types.ts';
 

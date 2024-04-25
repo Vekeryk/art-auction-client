@@ -12,7 +12,7 @@ import {
   Typography,
 } from '@mui/material';
 
-import { LotComment } from './../../../types';
+import { LotComment } from '../../../types.ts';
 import { toDateTimeString } from '../../../utils/dates.ts';
 import { authenticatedAction, getUserName } from '../../../utils/users.ts';
 

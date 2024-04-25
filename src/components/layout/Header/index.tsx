@@ -22,6 +22,7 @@ import useAppSelector from '../../../hooks/useAppSelector.ts';
 import useAppDispatch from '../../../hooks/useAppDispatch.ts';
 import { toggleTheme } from '../../../store/reducers/uiSlice.ts';
 import keycloak from '../../../utils/keycloak.ts';
+import { NAVIGATE_PATH as PATH } from '../../../helpers/constants.ts';
 
 interface IHeader {}
 
@@ -45,13 +46,17 @@ const Header: React.FC<IHeader> = () => {
           Арт Аукціон
         </Typography>
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-          <Button color="inherit" component={RouterLink} to="/">
+          <Button color="inherit" component={RouterLink} to={PATH.home}>
             Головна
           </Button>
-          <Button color="inherit" component={RouterLink} to="/about">
+          <Button color="inherit" component={RouterLink} to={PATH.about}>
             Про нас
           </Button>
-          <Button color="inherit" component={RouterLink} to="/lot">
+          <Button
+            color="inherit"
+            component={RouterLink}
+            to="/lots/170bad07-1c36-481a-80ba-c5e74efd16c8"
+          >
             Лоти
           </Button>
         </Box>

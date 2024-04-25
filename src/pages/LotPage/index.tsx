@@ -4,8 +4,8 @@ import { Box, Paper, Stack } from '@mui/material';
 
 import { Lot } from '../../types.ts';
 import Gallery from '../../components/common/Gallery';
-import LotTabs from '../../components/common/LotTabs';
-import LotDetails from '../../components/common/LotDetails';
+import LotTabs from '../../components/lot/LotTabs';
+import LotDetails from '../../components/lot/LotDetails';
 
 export const LotPage: React.FC = () => {
   const lot: Lot = {
@@ -21,11 +21,11 @@ export const LotPage: React.FC = () => {
       { id: '4', name: 'олія' },
     ],
     images: [
-      { id: '1', index: 1, imageUrl: 'src/assets/images/cool3.jpg' },
-      { id: '2', index: 2, imageUrl: 'src/assets/images/duck3.jpg' },
-      { id: '2', index: 2, imageUrl: 'src/assets/images/bear4.jpg' },
+      { id: '1', index: 1, image: 'src/assets/images/cool3.jpg' },
+      { id: '2', index: 2, image: 'src/assets/images/duck3.jpg' },
+      { id: '2', index: 2, image: 'src/assets/images/bear4.jpg' },
     ],
-    startPrice: 2000,
+    startingPrice: 2000,
     currentPrice: 2500,
     startTime: '2024-04-15T09:00:00Z',
     endTime: '2024-04-27T10:00:00Z',

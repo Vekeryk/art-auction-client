@@ -1,28 +1,23 @@
-import React, { ChangeEvent, useState } from 'react';
+import React from 'react';
 
-import { v4 as uuid } from 'uuid';
 import { Box, Button, IconButton, Paper } from '@mui/material';
 import AddAPhotoIcon from '@mui/icons-material/AddAPhoto';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-import { ImagePreview } from '../../../types.ts';
+import { LotImage } from '../../../types.ts';
+import { getPicturePath } from '../../../utils/lots.ts';
 
-const PictureWall: React.FC = () => {
-  const [files, setFiles] = useState<ImagePreview[]>([]);
+interface IPictureWall {
+  lotImages: LotImage[];
+  handleFileChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleDelete: (fileId: string) => void;
+}
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const targetFiles = event.target.files;
-    if (targetFiles && targetFiles.length) {
-      const file = targetFiles[0];
-      const url = URL.createObjectURL(file);
-      setFiles([...files, { id: uuid(), img: url, title: file.name }]);
-    }
-  };
-
-  const handleDelete = (fileId: string) => {
-    setFiles(files.filter(({ id }) => id !== fileId));
-  };
-
+const PictureWall: React.FC<IPictureWall> = ({
+  lotImages,
+  handleFileChange,
+  handleDelete,
+}: IPictureWall) => {
   const imageSize = { width: 215, height: 150 };
   return (
     <Box
@@ -34,19 +29,19 @@ const PictureWall: React.FC = () => {
         columnGap: 2,
       }}
     >
-      {files.map((file) => (
+      {lotImages.map((lotImage) => (
         <Paper
-          key={file.id}
+          key={lotImage.id}
           sx={{ width: 215, height: 150, position: 'relative' }}
         >
           <img
-            src={file.img}
-            alt={file.title}
+            src={getPicturePath(lotImage.image)}
+            alt=""
             loading="lazy"
-            style={{ objectFit: 'cover', ...imageSize }}
+            style={{ borderRadius: 4, objectFit: 'cover', ...imageSize }}
           />
           <IconButton
-            onClick={() => handleDelete(file.id)}
+            onClick={() => handleDelete(lotImage.id)}
             sx={{
               position: 'absolute',
               top: 0,

@@ -2,10 +2,13 @@ import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFnsV3';
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 import { Routes } from './pages/Routes.tsx';
 import useTheme from './hooks/useTheme';
 import useAuth from './hooks/useAuth.ts';
+
+const queryClient = new QueryClient();
 
 const App = () => {
   const theme = useTheme();
@@ -13,10 +16,12 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <CssBaseline />
-        <Routes />
-      </LocalizationProvider>
+      <QueryClientProvider client={queryClient}>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <CssBaseline />
+          <Routes />
+        </LocalizationProvider>
+      </QueryClientProvider>
     </ThemeProvider>
   );
 };
