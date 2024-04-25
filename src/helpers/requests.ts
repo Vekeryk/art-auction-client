@@ -9,6 +9,13 @@ export const fetchCategories = async () => {
   return response.data;
 };
 
+export const fetchLot = async (id?: string) => {
+  const response = await axios.get<Lot>(`http://localhost:3000/lots/${id}`, {
+    params: { id },
+  });
+  return response.data;
+};
+
 export const fetchTags = async () => {
   const response = await axios.get<Tag[]>('http://localhost:3000/tags');
   return response.data;

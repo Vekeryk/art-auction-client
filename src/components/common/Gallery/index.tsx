@@ -3,6 +3,7 @@ import React from 'react';
 import Carousel from 'react-material-ui-carousel';
 import { Box } from '@mui/material';
 import { LotImage } from '../../../types.ts';
+import { getPicturePath } from '../../../utils/lots.ts';
 
 interface IGallery {
   images: LotImage[];
@@ -15,16 +16,22 @@ const Gallery: React.FC<IGallery> = ({ images }) => {
       cycleNavigation
       navButtonsAlwaysVisible
       autoPlay={false}
-      sx={{ width: 500 }}
+      sx={{ width: '100%' }}
     >
-      {images.map((image) => (
+      {images.map(({ id, image }) => (
         <Box
-          sx={{ width: 500, height: 500, backgroundColor: 'gray' }}
-          key={image.id}
+          key={id}
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            height: 500,
+            backgroundColor: 'gray',
+            overflow: 'hidden',
+          }}
         >
           <img
-            style={{ width: 500, height: 500, objectFit: 'contain' }}
-            src={image.imageUrl}
+            style={{ maxWidth: '100%', objectFit: 'contain' }}
+            src={getPicturePath(image)}
             role="presentation"
             alt=""
           />

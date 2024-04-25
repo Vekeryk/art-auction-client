@@ -99,7 +99,7 @@ export enum DealType {
 
 export type Lot = {
   id: string;
-  name: string;
+  title: string;
   description: string;
   category: Category;
   tags: Tag[];
@@ -108,10 +108,12 @@ export type Lot = {
   currentPrice: number;
   startTime: string;
   endTime: string;
-  comments: LotComment[];
   bids: Bid[];
-  paymentMethods: string[];
-  deliveryMethods: string[];
+  comments: LotComment[];
+  paymentMethods: PaymentMethod[];
+  deliveryMethods: DeliveryMethod[];
+  dealType: DealType;
+  location: Location;
   createdAt: string;
   updatedAt: string;
 };

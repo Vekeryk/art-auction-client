@@ -1,4 +1,11 @@
-import { CreateLotFromValues, Lot } from '../types.ts';
+import {
+  CreateLotFromValues,
+  DealType,
+  DeliveryMethod,
+  Location,
+  Lot,
+  PaymentMethod,
+} from '../types.ts';
 import { addDays } from 'date-fns';
 
 export const getEnumValues = <T extends object>(someEnum: T) => {
@@ -12,25 +19,27 @@ export const getPicturePath = (fileName: string) => {
 export const getPreviewLot = (lotValues: CreateLotFromValues): Lot => {
   return {
     id: 'lot_id',
-    name: lotValues.title || 'Ваша назва',
+    title: lotValues.title || 'Ваша назва',
     description: lotValues.description || 'Ваш опис',
     category: lotValues.category || {
       id: 'category_id',
       name: 'Ваша категорія',
     },
     tags: lotValues.tags,
-    images: lotValues.images || [],
-    startPrice: lotValues.startPrice || 1,
-    currentPrice: lotValues.startPrice || 1,
+    startingPrice: lotValues.startingPrice || 1,
+    currentPrice: lotValues.startingPrice || 1,
     startTime: lotValues.startTime.toISOString(),
     endTime: addDays(
       lotValues.startTime,
       lotValues.durationInDays ?? 1,
     ).toISOString(),
-    comments: [],
     bids: [],
-    paymentMethods: [],
-    deliveryMethods: [],
+    comments: [],
+    images: [],
+    paymentMethods: Object.keys(lotValues.paymentMethods) as PaymentMethod[],
+    deliveryMethods: Object.keys(lotValues.deliveryMethods) as DeliveryMethod[],
+    dealType: lotValues.dealType || DealType.CASH_ON_DELIVERY,
+    location: lotValues.location || Location.IVANO_FRANKIVSK,
     createdAt: '',
     updatedAt: '',
   };

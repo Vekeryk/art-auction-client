@@ -1,4 +1,4 @@
-import { DeliveryMethod, Location, Option, PaymentMethod } from '../types.ts';
+import { DeliveryMethod, Option, PaymentMethod } from '../types.ts';
 
 export const NAVIGATE_PATH = {
   home: '/',
@@ -32,7 +32,7 @@ export const PAYMENT_METHODS: Record<PaymentMethod, string> = {
   BANK_TRANSFER: 'Банківський переказ',
   CASH_ON_MEETING: 'Готівкою при зустрічі',
   PAY_TO_COURIER: "Оплата кур'єру",
-  BY_AGREEMENT: 'За домовленністю/інше',
+  BY_AGREEMENT: 'За домовленністю',
 } as const;
 
 export const PAYMENT_METHOD_OPTIONS = Object.entries(
@@ -50,29 +50,29 @@ export const DELIVERY_METHOD_OPTIONS = Object.entries(
   DELIVERY_METHODS,
 ).map<Option>((entry) => ({ value: entry[0], label: entry[1] }));
 
-export const LOCATIONS: Record<Location, string> = {
-  KYIV: 'KYIV',
-  ODESA: 'ODESA',
-  KHARKIV: 'KHARKIV',
-  DNIPRO: 'DNIPRO',
-  ZAPORIZHZHIA: 'ZAPORIZHZHIA',
-  IVANO_FRANKIVSK: 'IVANO_FRANKIVSK',
-  CHERKASY: 'CHERKASY',
-  CHERNIVTSI: 'CHERNIVTSI',
-  KHERSON: 'KHERSON',
-  KHMELNYTSKYI: 'KHMELNYTSKYI',
-  LUHANSK: 'LUHANSK',
-  MYKOLAIV: 'MYKOLAIV',
-  POLTAVA: 'POLTAVA',
-  RIVNE: 'RIVNE',
-  SUMY: 'SUMY',
-  TERNOPIL: 'TERNOPIL',
-  VINNYTSIA: 'VINNYTSIA',
-  VOLYN: 'VOLYN',
-  ZAKARPATTIA: 'ZAKARPATTIA',
-  ZHYTOMYR: 'ZHYTOMYR',
-  KROPYVNYTSKYI: 'KROPYVNYTSKYI',
-  DONETSK: 'DONETSK',
+export const LOCATIONS: Record<string, string> = {
+  KYIV: 'Київська область',
+  ODESA: 'Одеська область',
+  KHARKIV: 'Харківська область',
+  DNIPRO: 'Дніпровська область',
+  ZAPORIZHZHIA: 'Запоріжська область',
+  IVANO_FRANKIVSK: 'Івано-Франківська область',
+  CHERKASY: 'Черкаська область',
+  CHERNIVTSI: 'Чернівецька область',
+  KHERSON: 'Херсонська область',
+  KHMELNYTSKYI: 'Хмельницька область',
+  LUHANSK: 'Луганська область',
+  MYKOLAIV: 'Миколаївська область',
+  POLTAVA: 'Полтавська область',
+  RIVNE: 'Рівненська область',
+  SUMY: 'Сумська область',
+  TERNOPIL: 'Тернопільська область',
+  VINNYTSIA: 'Вінницька область',
+  VOLYN: 'Волинська область',
+  ZAKARPATTIA: 'Закарпатська область',
+  ZHYTOMYR: 'Житомирська область',
+  KROPYVNYTSKYI: 'Кропивницька область',
+  DONETSK: 'Донецька область',
 } as const;
 
 export const LOCATION_OPTIONS = Object.entries(LOCATIONS).map<Option>(

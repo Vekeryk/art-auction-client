@@ -3,6 +3,11 @@ import React from 'react';
 import { Stack, Typography } from '@mui/material';
 
 import { Lot } from '../../../types.ts';
+import {
+  DELIVERY_METHODS,
+  LOCATIONS,
+  PAYMENT_METHODS,
+} from '../../../helpers/constants.ts';
 
 interface ILotDescriptionPanel {
   lot: Lot;
@@ -27,11 +32,19 @@ const LotDescriptionPanel: React.FC<ILotDescriptionPanel> = ({
         <Typography variant="h6">Тип угоди:</Typography>
         <Typography>Післяоплата</Typography>
         <Typography variant="h6">Способи оплати:</Typography>
-        <Typography>{lot.paymentMethods.join(', ')}</Typography>
+        <Typography>
+          {lot.paymentMethods
+            .map((method) => PAYMENT_METHODS[method])
+            .join(', ')}
+        </Typography>
         <Typography variant="h6">Розташування:</Typography>
-        <Typography>Івано-Франківська область</Typography>
+        <Typography>{LOCATIONS[lot.location]}</Typography>
         <Typography variant="h6">Доставка:</Typography>
-        <Typography>{lot.deliveryMethods.join(', ')}</Typography>
+        <Typography>
+          {lot.deliveryMethods
+            .map((method) => DELIVERY_METHODS[method])
+            .join(', ')}
+        </Typography>
       </Stack>
     </div>
   );

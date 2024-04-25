@@ -27,13 +27,13 @@ const LotDetails: React.FC<ILotDetails> = ({ lot }) => {
   return (
     <Stack spacing={2} flexGrow={1}>
       <Stack spacing={2} flexGrow={1}>
-        <Typography variant="h4">{lot.name}</Typography>
+        <Typography variant="h4">{lot.title}</Typography>
         <CategoryAndTags category={lot.category} tags={lot.tags} />
         <Stack spacing={2}>
           <IconContainer>
             <SellIcon />
             <Typography variant="h6">
-              Поточна ціна: {lot.currentPrice} грн.
+              Поточна ціна: {lot.currentPrice ?? lot.startingPrice} грн.
             </Typography>
           </IconContainer>
           <IconContainer>

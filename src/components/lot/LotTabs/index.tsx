@@ -22,12 +22,12 @@ const LotTabs: React.FC<ILotTabs> = ({ lot }) => {
           onChange={(_, index) => setCurrentIndex(index)}
         >
           <Tab label="Опис" />
-          <Tab label={`Ставки (${lot.bids.length})`} />
+          <Tab label={`Ставки (${[].length})`} />
           <Tab label={`Коментарі (${lot.comments.length})`} />
         </Tabs>
       </Box>
       <LotDescriptionPanel lot={lot} currentTabIndex={currentIndex} index={0} />
-      <LotBidsPanel bids={lot.bids} currentTabIndex={currentIndex} index={1} />
+      <LotBidsPanel bids={[]} currentTabIndex={currentIndex} index={1} />
       <LotCommentsPanel
         comments={lot.comments}
         currentTabIndex={currentIndex}
