@@ -23,13 +23,13 @@ const LotTabs: React.FC<ILotTabs> = ({ lot }) => {
         >
           <Tab label="Опис" />
           <Tab label={`Ставки (${[].length})`} />
-          <Tab label={`Коментарі (${lot.comments.length})`} />
+          <Tab label={`Коментарі (${lot.comments?.length})`} />
         </Tabs>
       </Box>
       <LotDescriptionPanel lot={lot} currentTabIndex={currentIndex} index={0} />
       <LotBidsPanel bids={[]} currentTabIndex={currentIndex} index={1} />
       <LotCommentsPanel
-        comments={lot.comments}
+        lotComments={lot.comments}
         currentTabIndex={currentIndex}
         index={2}
       />

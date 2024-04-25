@@ -17,6 +17,9 @@ const useAuth = () => {
         keycloak
           .loadUserProfile()
           .then((profile) => dispatch(setUser(profile as CurrentUser)));
+        if (keycloak.token) {
+          localStorage.setItem('token', keycloak.token);
+        }
       } else {
         dispatch(setUser(null));
       }

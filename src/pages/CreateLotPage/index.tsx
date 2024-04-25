@@ -213,6 +213,7 @@ export const CreateLotPage: React.FC = () => {
       </CardContent>
       <LotPreviewModal
         lotValues={getValues()}
+        lotImages={lotImages}
         open={previewOpen}
         handleClose={() => setPreviewOpen(false)}
       />

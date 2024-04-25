@@ -4,6 +4,7 @@ import {
   DeliveryMethod,
   Location,
   Lot,
+  LotImage,
   PaymentMethod,
 } from '../types.ts';
 import { addDays } from 'date-fns';
@@ -16,7 +17,11 @@ export const getPicturePath = (fileName: string) => {
   return `http://localhost:3000/uploads/${fileName}`;
 };
 
-export const getPreviewLot = (lotValues: CreateLotFromValues): Lot => {
+export const getPreviewLot = (
+  lotValues: Partial<CreateLotFromValues>,
+  lotImages: LotImage[],
+): Lot => {
+  const startTime = lotValues.startTime ?? new Date();
   return {
     id: 'lot_id',
     title: lotValues.title || 'Ваша назва',
@@ -25,19 +30,20 @@ export const getPreviewLot = (lotValues: CreateLotFromValues): Lot => {
       id: 'category_id',
       name: 'Ваша категорія',
     },
-    tags: lotValues.tags,
+    tags: lotValues.tags ?? [],
     startingPrice: lotValues.startingPrice || 1,
     currentPrice: lotValues.startingPrice || 1,
-    startTime: lotValues.startTime.toISOString(),
-    endTime: addDays(
-      lotValues.startTime,
-      lotValues.durationInDays ?? 1,
-    ).toISOString(),
+    startTime: startTime.toISOString(),
+    endTime: addDays(startTime, lotValues.durationInDays ?? 1).toISOString(),
     bids: [],
     comments: [],
-    images: [],
-    paymentMethods: Object.keys(lotValues.paymentMethods) as PaymentMethod[],
-    deliveryMethods: Object.keys(lotValues.deliveryMethods) as DeliveryMethod[],
+    images: lotImages,
+    paymentMethods: Object.keys(
+      lotValues.paymentMethods ?? {},
+    ) as PaymentMethod[],
+    deliveryMethods: Object.keys(
+      lotValues.deliveryMethods ?? {},
+    ) as DeliveryMethod[],
     dealType: lotValues.dealType || DealType.CASH_ON_DELIVERY,
     location: lotValues.location || Location.IVANO_FRANKIVSK,
     createdAt: '',

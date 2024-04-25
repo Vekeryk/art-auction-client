@@ -1,32 +1,33 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 
 import {
   Avatar,
-  Button,
   Divider,
   List,
   ListItem,
   ListItemAvatar,
   ListItemText,
-  Stack,
   Typography,
 } from '@mui/material';
 
 import { LotComment } from '../../../types.ts';
 import { toDateTimeString } from '../../../utils/dates.ts';
-import { authenticatedAction, getUserName } from '../../../utils/users.ts';
+import { getUserName } from '../../../utils/users.ts';
+import LotCommentAction from '../LotCommentAction';
 
 interface ILotCommentsPanel {
-  comments: LotComment[];
+  lotComments: LotComment[];
   index: number;
   currentTabIndex: number;
 }
 
 const LotCommentsPanel: React.FC<ILotCommentsPanel> = ({
-  comments,
+  lotComments,
   index,
   currentTabIndex,
 }) => {
+  const [comments] = useState(lotComments);
+
   return (
     <div
       role="tabpanel"
@@ -61,14 +62,7 @@ const LotCommentsPanel: React.FC<ILotCommentsPanel> = ({
           Будьте першими!
         </Typography>
       )}
-      <Stack alignItems="center" marginY={2}>
-        <Button
-          variant="contained"
-          onClick={() => authenticatedAction(() => {})}
-        >
-          Додати коментар
-        </Button>
-      </Stack>
+      <LotCommentAction />
     </div>
   );
 };

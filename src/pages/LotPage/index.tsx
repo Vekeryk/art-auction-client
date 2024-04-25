@@ -11,12 +11,12 @@ import { fetchLot } from '../../helpers/requests.ts';
 import Loading from '../../components/layout/Loading';
 
 export const LotPage: React.FC = () => {
-  const { id } = useParams();
+  const { lotId } = useParams();
   const {
     data: lot,
     isError,
     isLoading,
-  } = useQuery('categories', () => fetchLot(id));
+  } = useQuery('categories', () => fetchLot(lotId));
 
   if (!lot || isLoading || isError) {
     return <Loading />;

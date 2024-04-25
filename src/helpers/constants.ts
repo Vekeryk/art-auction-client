@@ -2,7 +2,7 @@ import { DeliveryMethod, Option, PaymentMethod } from '../types.ts';
 
 export const NAVIGATE_PATH = {
   home: '/',
-  lot: '/lots/:id',
+  lot: '/lots/:lotId',
   search: '/search',
   createLot: '/create-lot',
   about: '/about',

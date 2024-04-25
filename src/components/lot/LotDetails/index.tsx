@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 import { Button, Stack, TextField, Typography } from '@mui/material';
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
-import WarningIcon from '@mui/icons-material/Warning';
 import GroupsIcon from '@mui/icons-material/Groups';
 import GavelIcon from '@mui/icons-material/Gavel';
 import SellIcon from '@mui/icons-material/Sell';
@@ -12,6 +11,7 @@ import CategoryAndTags from '../../common/CategoryAndTags';
 import IconContainer from '../../common/IconContainer';
 import { authenticatedAction } from '../../../utils/users.ts';
 import { Lot } from '../../../types.ts';
+import LotReportAction from '../LotReportAction';
 
 interface ILotDetails {
   lot: Lot;
@@ -66,14 +66,7 @@ const LotDetails: React.FC<ILotDetails> = ({ lot }) => {
           </Button>
         </Stack>
       </Stack>
-      <Button
-        variant="text"
-        color="warning"
-        sx={{ alignSelf: 'end', justifySelf: 'end' }}
-        startIcon={<WarningIcon />}
-      >
-        Повідомити про порушення
-      </Button>
+      <LotReportAction />
     </Stack>
   );
 };
