@@ -15,6 +15,7 @@ const Gallery: React.FC<IGallery> = ({ images }) => {
       animation="slide"
       cycleNavigation
       navButtonsAlwaysVisible
+      navButtonsAlwaysInvisible={images.length === 1}
       autoPlay={false}
       sx={{ width: '100%' }}
     >

@@ -14,6 +14,7 @@ import { LotComment } from '../../../types.ts';
 import { toDateTimeString } from '../../../utils/dates.ts';
 import { getUserName } from '../../../utils/users.ts';
 import LotCommentAction from '../LotCommentAction';
+import { getPicturePath } from '../../../utils/lots.ts';
 
 interface ILotCommentsPanel {
   lotComments: LotComment[];
@@ -44,7 +45,9 @@ const LotCommentsPanel: React.FC<ILotCommentsPanel> = ({
             <Fragment key={comment.id}>
               <ListItem alignItems="flex-start" sx={{ flexWrap: 'wrap' }}>
                 <ListItemAvatar>
-                  <Avatar src={comment.user.profilePictureUrl} />
+                  <Avatar
+                    src={getPicturePath(comment.user.profilePicture ?? '')}
+                  />
                 </ListItemAvatar>
                 <ListItemText
                   primary={getUserName(comment.user)}

@@ -21,7 +21,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route element={<Layout />}>
       <Route path={PATH.home} element={<HomePage />} />
-      <Route path={PATH.lot} element={<LotPage />} />
+      <Route path={PATH.lot(':lotId')} element={<LotPage />} />
       <Route path={PATH.search} element={<SearchPage />} />
       <Route path={PATH.about} element={<AboutPage />} />
       <Route element={<ProtectedPage />}>

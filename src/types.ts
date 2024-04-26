@@ -19,7 +19,7 @@ export type BaseUser = {
   firstName?: string;
   lastName?: string;
   rating: number;
-  profilePictureUrl?: string;
+  profilePicture?: string;
   createdAt: string;
 };
 

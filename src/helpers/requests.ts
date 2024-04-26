@@ -15,9 +15,12 @@ export const fetchCategories = async () => {
 };
 
 export const fetchLot = async (id?: string) => {
-  const response = await axiosInstance.get<Lot>(`lots/${id}`, {
-    params: { id },
-  });
+  const response = await axiosInstance.get<Lot>(`lots/${id}`);
+  return response.data;
+};
+
+export const fetchLots = async () => {
+  const response = await axiosInstance.get<Lot[]>(`lots`);
   return response.data;
 };
 

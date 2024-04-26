@@ -2,7 +2,7 @@ import { DeliveryMethod, Option, PaymentMethod } from '../types.ts';
 
 export const NAVIGATE_PATH = {
   home: '/',
-  lot: '/lots/:lotId',
+  lot: (lotId: string) => `/lots/${lotId}`,
   search: '/search',
   createLot: '/create-lot',
   about: '/about',
@@ -26,6 +26,13 @@ export const INPUT_PROPS = {
   size: 'small',
   margin: 'normal',
   fullWidth: true,
+} as const;
+
+export const ELLIPSIS_STYLES = {
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+  display: '-webkit-box',
+  WebkitBoxOrient: 'vertical',
 } as const;
 
 export const PAYMENT_METHODS: Record<PaymentMethod, string> = {

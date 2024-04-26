@@ -16,7 +16,7 @@ export const LotPage: React.FC = () => {
     data: lot,
     isError,
     isLoading,
-  } = useQuery('categories', () => fetchLot(lotId));
+  } = useQuery(['lot', { lotId }], () => fetchLot(lotId));
 
   if (!lot || isLoading || isError) {
     return <Loading />;

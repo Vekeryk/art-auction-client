@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Fade, Modal, Paper, Stack } from '@mui/material';
+import { Box, Fade, Modal, Paper, Stack, Typography } from '@mui/material';
 
 import Gallery from '../../common/Gallery';
 import LotDetails from '../LotDetails';
@@ -41,6 +41,7 @@ const LotPreviewModal: React.FC<ILotPreviewModal> = ({
           }}
         >
           <Stack spacing={3}>
+            <Typography variant="h4">Попередній перегляд</Typography>
             <Paper sx={{ padding: 2 }} elevation={2}>
               <Stack direction="row" spacing={2} flexGrow={1}>
                 <Box sx={{ width: '50%' }}>
