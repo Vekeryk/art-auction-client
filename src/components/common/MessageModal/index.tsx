@@ -10,7 +10,7 @@ interface IMessageModal {
   inputPlaceholder: string;
   open: boolean;
   onClose: () => void;
-  handleSubmit: () => void;
+  handleSubmit: (content: string) => void;
 }
 
 const MessageModal: React.FC<IMessageModal> = ({
@@ -22,7 +22,7 @@ const MessageModal: React.FC<IMessageModal> = ({
   onClose,
   handleSubmit,
 }) => {
-  const [input, setInput] = useState('');
+  const [content, setContent] = useState('');
 
   return (
     <AppModal open={open} onClose={onClose}>
@@ -35,13 +35,16 @@ const MessageModal: React.FC<IMessageModal> = ({
           fullWidth
           multiline
           rows={4}
-          value={input}
+          value={content}
           placeholder={inputPlaceholder}
-          onChange={(event) => setInput(event.target.value)}
+          onChange={(event) => setContent(event.target.value)}
           margin="dense"
         />
         <Button
-          onClick={handleSubmit}
+          onClick={() => {
+            handleSubmit(content);
+            setContent('');
+          }}
           variant="contained"
           sx={{ mt: 2, alignSelf: 'center' }}
         >

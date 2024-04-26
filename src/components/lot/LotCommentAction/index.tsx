@@ -4,16 +4,26 @@ import { useParams } from 'react-router-dom';
 
 import MessageModal from '../../common/MessageModal';
 import { authenticatedAction } from '../../../utils/users.ts';
+import { createComment } from '../../../helpers/requests.ts';
+import { LotComment } from '../../../types.ts';
 
-interface ILotCommentAction {}
+interface ILotCommentAction {
+  onAddComment: (comment: LotComment) => void;
+}
 
-const LotCommentAction: React.FC<ILotCommentAction> = () => {
+const LotCommentAction: React.FC<ILotCommentAction> = ({ onAddComment }) => {
   const { lotId } = useParams();
   const [open, setOpen] = useState(false);
 
   if (!lotId) {
     return null;
   }
+
+  const handleSubmit = async (content: string) => {
+    const comment = await createComment({ content, lotId });
+    onAddComment(comment);
+    setOpen(false);
+  };
 
   return (
     <Stack alignItems="center" marginY={2}>
@@ -30,9 +40,7 @@ const LotCommentAction: React.FC<ILotCommentAction> = () => {
         inputPlaceholder="Що у вас на думці?"
         open={open}
         onClose={() => setOpen(false)}
-        handleSubmit={() => {
-          setOpen(false);
-        }}
+        handleSubmit={handleSubmit}
       />
     </Stack>
   );

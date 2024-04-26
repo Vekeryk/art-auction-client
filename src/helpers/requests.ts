@@ -1,5 +1,13 @@
 import axiosInstance from '../utils/axios.ts';
-import { Category, CreateLot, Lot, LotImage, Tag } from '../types.ts';
+import {
+  Category,
+  CreateComment,
+  CreateLot,
+  Lot,
+  LotComment,
+  LotImage,
+  Tag,
+} from '../types.ts';
 
 export const fetchCategories = async () => {
   const response = await axiosInstance.get<Category[]>('categories');
@@ -20,6 +28,11 @@ export const fetchTags = async () => {
 
 export const createLot = async (data: Partial<CreateLot>) => {
   const response = await axiosInstance.post<Lot>('lots', data);
+  return response.data;
+};
+
+export const createComment = async (data: CreateComment) => {
+  const response = await axiosInstance.post<LotComment>('comments', data);
   return response.data;
 };
 

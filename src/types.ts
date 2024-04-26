@@ -18,6 +18,7 @@ export type BaseUser = {
   username: string;
   firstName?: string;
   lastName?: string;
+  rating: number;
   profilePictureUrl?: string;
   createdAt: string;
 };
@@ -145,6 +146,11 @@ export type CreateLot = {
   paymentMethods: PaymentMethod[];
   deliveryMethods: DeliveryMethod[];
   location: Location;
+};
+
+export type CreateComment = {
+  content: string;
+  lotId: string;
 };
 
 export type Bid = {

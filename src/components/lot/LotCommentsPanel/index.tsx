@@ -26,16 +26,20 @@ const LotCommentsPanel: React.FC<ILotCommentsPanel> = ({
   index,
   currentTabIndex,
 }) => {
-  const [comments] = useState(lotComments);
+  const [comments, setComments] = useState(lotComments);
+
+  const handleAddComment = (comment: LotComment) => {
+    setComments([...comments, comment]);
+  };
 
   return (
     <div
       role="tabpanel"
       hidden={index !== currentTabIndex}
-      style={{ minHeight: 150 }}
+      style={{ minHeight: 150, paddingBottom: 5 }}
     >
       {comments.length ? (
-        <List>
+        <List sx={{ maxHeight: 600, overflowX: 'auto' }}>
           {comments.map((comment) => (
             <Fragment key={comment.id}>
               <ListItem alignItems="flex-start" sx={{ flexWrap: 'wrap' }}>
@@ -62,7 +66,7 @@ const LotCommentsPanel: React.FC<ILotCommentsPanel> = ({
           Будьте першими!
         </Typography>
       )}
-      <LotCommentAction />
+      <LotCommentAction onAddComment={handleAddComment} />
     </div>
   );
 };

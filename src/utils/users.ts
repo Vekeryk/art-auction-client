@@ -10,16 +10,12 @@ export const authenticatedAction = (callback: () => void) => {
 };
 
 export const getUserName = (user: BaseUser) => {
-  const { username, firstName, lastName } = user;
+  const { username, firstName, lastName, rating } = user;
   if (!firstName && !lastName) {
-    return `${username} (${getRandomInt(100)})`;
+    return `${username} (${rating})`;
   }
   if (!firstName || !lastName) {
-    return `${username} / ${firstName || lastName} (${getRandomInt(100)})`;
+    return `${username} / ${firstName || lastName} (${rating})`;
   }
-  return `${username} / ${firstName} ${lastName} (${getRandomInt(100)})`;
-};
-
-const getRandomInt = (max: number) => {
-  return Math.floor(Math.random() * max);
+  return `${username} / ${firstName} ${lastName} (${rating})`;
 };
