@@ -1,5 +1,5 @@
 import React from 'react';
 
-export const SearchPage: React.FC = () => {
+export const LotsSearchPage: React.FC = () => {
   return <div></div>;
 };

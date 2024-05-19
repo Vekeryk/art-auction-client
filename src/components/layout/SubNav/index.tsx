@@ -1,17 +1,11 @@
 import React from 'react';
 
-import {
-  Box,
-  Button,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-} from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 
+import CategoryList from '../../common/CategoryList';
 import GlobalSearch from '../../common/GlobalSearch';
-import { CATEGORIES, NAVIGATE_PATH } from '../../../helpers/constants.ts';
+import { NAVIGATE_PATH } from '../../../helpers/constants.ts';
 
 const SubNav: React.FC = () => {
   return (
@@ -47,18 +41,7 @@ const SubNav: React.FC = () => {
         </Button>
       </Box>
       <Box>
-        <List sx={{ display: 'flex', overflowX: 'auto' }}>
-          {CATEGORIES.map((category) => (
-            <ListItem key={category.id} disablePadding>
-              <ListItemButton>
-                <ListItemText
-                  primary={category.name}
-                  sx={{ whiteSpace: 'nowrap', textAlign: 'center' }}
-                />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
+        <CategoryList />
       </Box>
     </Box>
   );

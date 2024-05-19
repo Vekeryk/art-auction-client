@@ -41,6 +41,7 @@ const MessageModal: React.FC<IMessageModal> = ({
           margin="dense"
         />
         <Button
+          disabled={!content}
           onClick={() => {
             handleSubmit(content);
             setContent('');

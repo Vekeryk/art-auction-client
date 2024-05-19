@@ -10,10 +10,10 @@ import Layout from '../components/layout/Layout';
 import {
   HomePage,
   LotPage,
-  SearchPage,
   CreateLotPage,
   AboutPage,
   ProtectedPage,
+  LotsSearchPage,
 } from './index.ts';
 import { NAVIGATE_PATH as PATH } from '../helpers/constants.ts';
 
@@ -22,8 +22,8 @@ const router = createBrowserRouter(
     <Route element={<Layout />}>
       <Route path={PATH.home} element={<HomePage />} />
       <Route path={PATH.lot(':lotId')} element={<LotPage />} />
-      <Route path={PATH.search} element={<SearchPage />} />
       <Route path={PATH.about} element={<AboutPage />} />
+      <Route path={PATH.lots} element={<LotsSearchPage />} />
       <Route element={<ProtectedPage />}>
         <Route path={PATH.createLot} element={<CreateLotPage />} />
       </Route>
