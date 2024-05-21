@@ -13,12 +13,12 @@ import { useQuery } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 
 import { getPicturePath } from '../../../utils/lots.ts';
-import { fetchLots } from '../../../helpers/requests.ts';
+import { fetchRecentLots } from '../../../helpers/requests.ts';
 import { ELLIPSIS_STYLES, NAVIGATE_PATH } from '../../../helpers/constants.ts';
 
 const RecentLots: React.FC = () => {
   const navigate = useNavigate();
-  const { data: lots, isLoading } = useQuery('lots', fetchLots);
+  const { data: lots, isLoading } = useQuery('lots', fetchRecentLots);
 
   if (!lots || isLoading) {
     return (
@@ -30,8 +30,8 @@ const RecentLots: React.FC = () => {
 
   return (
     <Grid container spacing={4}>
-      {lots.map((lot, index) => (
-        <Grid item xs={6} sm={4} md={3} key={index}>
+      {lots.map((lot) => (
+        <Grid item xs={6} sm={4} md={3} key={lot.id}>
           <Card sx={{ height: '100%' }}>
             <CardActionArea
               sx={{ height: '100%' }}

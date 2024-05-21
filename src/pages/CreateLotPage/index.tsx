@@ -31,7 +31,7 @@ import {
 } from '../../helpers/constants.ts';
 import {
   CreateLot,
-  CreateLotFromValues,
+  CreateLotFormValues,
   DeliveryMethod,
   LotImage,
   PaymentMethod,
@@ -50,7 +50,7 @@ export const CreateLotPage: React.FC = () => {
     register,
     getValues,
     formState: { errors },
-  } = useForm<CreateLotFromValues>({
+  } = useForm<CreateLotFormValues>({
     defaultValues: {
       title: '',
       description: '',
@@ -76,7 +76,7 @@ export const CreateLotPage: React.FC = () => {
     setLotImages(lotImages.filter(({ id }) => id !== fileId));
   };
 
-  const onSubmit = (data: CreateLotFromValues) => {
+  const onSubmit = (data: CreateLotFormValues) => {
     const createLot: Partial<CreateLot> = {
       ...data,
       categoryId: data.category?.id,
@@ -113,8 +113,8 @@ export const CreateLotPage: React.FC = () => {
           {...register('description')}
           {...INPUT_PROPS}
         />
-        <CategorySelect control={control} required />
-        <TagsAutocomplete control={control} />
+        <CategorySelect control={control} name="category" required />
+        <TagsAutocomplete control={control} name="tags" required />
         <SelectInput
           label="Місцерозташування лоту"
           name="location"

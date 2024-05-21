@@ -1,18 +1,17 @@
-import React from 'react';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { useQuery } from 'react-query';
-import { Control, Controller } from 'react-hook-form';
+import { Controller, FieldValues } from 'react-hook-form';
 
 import { fetchCategories } from '../../../helpers/requests.ts';
-import { CreateLotFromValues } from '../../../types.ts';
 import { INPUT_PROPS } from '../../../helpers/constants.ts';
+import { GenericFormControl } from '../../../types.ts';
 
-interface ICategorySelect {
-  required?: boolean;
-  control: Control<CreateLotFromValues>;
-}
-
-const CategorySelect: React.FC<ICategorySelect> = ({ required, control }) => {
+function CategorySelect<T extends FieldValues>({
+  required,
+  control,
+  name,
+  clearOption,
+}: GenericFormControl<T>) {
   const { data: categories } = useQuery('categories', fetchCategories, {
     initialData: [],
   });
@@ -29,7 +28,7 @@ const CategorySelect: React.FC<ICategorySelect> = ({ required, control }) => {
               onChange(
                 categories?.find(
                   (category) => category.id === event.target.value,
-                ),
+                ) ?? null,
               );
             }}
             value={value?.id ?? ''}
@@ -38,6 +37,7 @@ const CategorySelect: React.FC<ICategorySelect> = ({ required, control }) => {
             label="Категорія"
             MenuProps={{ sx: { maxHeight: 300 } }}
           >
+            {clearOption && <MenuItem value={''}>Усі категорії</MenuItem>}
             {categories?.map((option, index) => (
               <MenuItem key={index} value={option.id}>
                 {option.name}
@@ -46,10 +46,10 @@ const CategorySelect: React.FC<ICategorySelect> = ({ required, control }) => {
           </Select>
         )}
         control={control}
-        name="category"
+        name={name}
       />
     </FormControl>
   );
-};
+}
 
 export default CategorySelect;

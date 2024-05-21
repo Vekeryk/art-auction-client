@@ -1,5 +1,5 @@
 import {
-  CreateLotFromValues,
+  CreateLotFormValues,
   DealType,
   DeliveryMethod,
   Location,
@@ -18,7 +18,7 @@ export const getPicturePath = (fileName: string) => {
 };
 
 export const getPreviewLot = (
-  lotValues: Partial<CreateLotFromValues>,
+  lotValues: Partial<CreateLotFormValues>,
   lotImages: LotImage[],
 ): Lot => {
   const startTime = lotValues.startTime ?? new Date();

@@ -1,15 +1,17 @@
 import React from 'react';
+
 import { MenuItem, TextField } from '@mui/material';
+import { Control, Controller } from 'react-hook-form';
+
 import {
   AUCTION_DURATIONS_IN_DAYS,
   INPUT_PROPS,
 } from '../../../helpers/constants.ts';
-import { Control, Controller } from 'react-hook-form';
-import { CreateLotFromValues } from '../../../types.ts';
+import { CreateLotFormValues } from '../../../types.ts';
 
 interface IDurationSelect {
   required?: boolean;
-  control: Control<CreateLotFromValues>;
+  control: Control<CreateLotFormValues>;
 }
 
 const DurationSelect: React.FC<IDurationSelect> = ({ control }) => {

@@ -4,11 +4,11 @@ import { Box, Fade, Modal, Paper, Stack, Typography } from '@mui/material';
 import Gallery from '../../common/Gallery';
 import LotDetails from '../LotDetails';
 import LotTabs from '../LotTabs';
-import { CreateLotFromValues, LotImage } from '../../../types.ts';
+import { CreateLotFormValues, LotImage } from '../../../types.ts';
 import { getPreviewLot } from '../../../utils/lots.ts';
 
 interface ILotPreviewModal {
-  lotValues: CreateLotFromValues;
+  lotValues: CreateLotFormValues;
   lotImages: LotImage[];
   open: boolean;
   handleClose: () => void;

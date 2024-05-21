@@ -8,12 +8,12 @@ import {
 } from '@mui/material';
 import { Control, Controller } from 'react-hook-form';
 
-import { CreateLotFromValues, Option } from '../../../types.ts';
+import { CreateLotFormValues, Option } from '../../../types.ts';
 
 interface IRadioInput {
-  name: keyof CreateLotFromValues;
+  name: keyof CreateLotFormValues;
   label: string;
-  control: Control<CreateLotFromValues>;
+  control: Control<CreateLotFormValues>;
   options: Option[];
 }
 

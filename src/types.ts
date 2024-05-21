@@ -1,3 +1,5 @@
+import { Control, FieldValues, Path } from 'react-hook-form';
+
 export type Theme = 'light' | 'dark';
 
 export type ImagePreview = {
@@ -119,7 +121,7 @@ export type Lot = {
   updatedAt: string;
 };
 
-export type CreateLotFromValues = {
+export type CreateLotFormValues = {
   title: string;
   description: string;
   category?: Category;
@@ -131,6 +133,32 @@ export type CreateLotFromValues = {
   paymentMethods: Record<PaymentMethod, boolean>;
   deliveryMethods: Record<DeliveryMethod, boolean>;
   location: Location;
+};
+
+export type SearchLotsQuery = {
+  categoryId: string;
+  tagIds: string[];
+  location: Location;
+  page: number;
+  limit: number;
+};
+
+export type PageableLots = {
+  lots: Lot[];
+  count: number;
+};
+
+export type SearchLotsFormValues = {
+  category?: Category;
+  tags: Tag[];
+  location: Location;
+};
+
+export type GenericFormControl<T extends FieldValues> = {
+  required?: boolean;
+  control: Control<T>;
+  name: Path<T>;
+  clearOption?: boolean;
 };
 
 export type CreateLot = {

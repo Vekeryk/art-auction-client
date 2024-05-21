@@ -6,6 +6,8 @@ import {
   Lot,
   LotComment,
   LotImage,
+  PageableLots,
+  SearchLotsQuery,
   Tag,
 } from '../types.ts';
 
@@ -19,8 +21,23 @@ export const fetchLot = async (id?: string) => {
   return response.data;
 };
 
-export const fetchLots = async () => {
-  const response = await axiosInstance.get<Lot[]>(`lots`);
+export const fetchRecentLots = async () => {
+  const response = await axiosInstance.get<PageableLots>(`lots`);
+  return response.data.lots;
+};
+
+export const searchLotsByTitle = async (title: string) => {
+  const response = await axiosInstance.get<Pick<Lot, 'id' | 'title'>[]>(
+    `lots`,
+    {
+      params: { title },
+    },
+  );
+  return response.data;
+};
+
+export const fetchFilteredLots = async (params: Partial<SearchLotsQuery>) => {
+  const response = await axiosInstance.get<PageableLots>(`lots`, { params });
   return response.data;
 };
 
