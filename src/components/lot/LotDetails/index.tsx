@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { io, Socket } from 'socket.io-client';
 
 import { Button, Stack, TextField, Typography } from '@mui/material';
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
@@ -19,9 +20,38 @@ interface ILotDetails {
 
 const LotDetails: React.FC<ILotDetails> = ({ lot }) => {
   const [bidAmount, setBidAmount] = useState(lot.currentPrice + 20);
+  const connection = useRef<Socket | null>(null);
 
-  const handleBidSubmit = () => {
-    console.log(`Submitting bid: ${bidAmount} for lot ${lot.id}`);
+  useEffect(() => {
+    if (!lot) {
+      return;
+    }
+    const socket = io('http://localhost:3001', {
+      query: { token: localStorage.getItem('token'), lotId: lot.id },
+    });
+
+    socket.on('bidUpdate', (updatedLot) => {
+      console.log(updatedLot);
+    });
+
+    socket.on('error', (message) => {
+      console.error('WebSocket Error:', message);
+    });
+
+    connection.current = socket;
+
+    return () => {
+      console.log('Closing websocket connection...');
+      socket.close();
+    };
+  }, [lot]);
+
+  const handlePlaceBid = () => {
+    console.log(connection.current);
+    connection.current?.emit('placeBid', {
+      lotId: lot.id,
+      amount: bidAmount,
+    });
   };
 
   return (
@@ -57,7 +87,7 @@ const LotDetails: React.FC<ILotDetails> = ({ lot }) => {
             }}
           />
           <Button
-            onClick={() => authenticatedAction(handleBidSubmit)}
+            onClick={() => authenticatedAction(handlePlaceBid)}
             variant="contained"
             color="primary"
             startIcon={<GavelIcon />}
