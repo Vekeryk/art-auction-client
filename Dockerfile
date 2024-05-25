@@ -1,4 +1,3 @@
-# Dockerfile for React frontend
 FROM node:22-alpine as build
 
 WORKDIR /usr/src/app
