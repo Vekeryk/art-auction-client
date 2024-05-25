@@ -6,6 +6,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import CategoryList from '../../common/CategoryList';
 import GlobalSearch from '../../common/GlobalSearch';
 import { NAVIGATE_PATH } from '../../../helpers/constants.ts';
+import logo from '../../../assets/images/logo.png';
 
 const SubNav: React.FC = () => {
   return (
@@ -24,12 +25,7 @@ const SubNav: React.FC = () => {
           gap: 3,
         }}
       >
-        <img
-          src="/src/assets/images/logo.png"
-          alt=""
-          height={56}
-          style={{ borderRadius: '5px' }}
-        />
+        <img src={logo} alt="" height={56} style={{ borderRadius: '5px' }} />
         <GlobalSearch />
         <Button
           sx={{ height: 54 }}

@@ -1,7 +1,10 @@
 import React from 'react';
+
 import { Box, Button, Stack, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+
 import { NAVIGATE_PATH } from '../../../helpers/constants.ts';
+import banner from '../../../assets/images/banner.webp';
 
 const Landing: React.FC = () => {
   return (
@@ -48,7 +51,7 @@ const Landing: React.FC = () => {
         }}
       >
         <img
-          src="/src/assets/images/banner.webp"
+          src={banner}
           alt=""
           style={{
             width: '100%',
