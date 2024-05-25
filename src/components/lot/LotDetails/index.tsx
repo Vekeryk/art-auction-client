@@ -26,7 +26,7 @@ const LotDetails: React.FC<ILotDetails> = ({ lot }) => {
     if (!lot) {
       return;
     }
-    const socket = io('http://localhost:3001', {
+    const socket = io(import.meta.env.VITE_BIDS_SERVICE_URL, {
       query: { token: localStorage.getItem('token'), lotId: lot.id },
     });
 

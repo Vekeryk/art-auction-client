@@ -14,7 +14,7 @@ export const getEnumValues = <T extends object>(someEnum: T) => {
 };
 
 export const getPicturePath = (fileName: string) => {
-  return `http://localhost:3000/uploads/${fileName}`;
+  return `${import.meta.env.VITE_AUCTION_SERVICE_URL}/uploads/${fileName}`;
 };
 
 export const getPreviewLot = (

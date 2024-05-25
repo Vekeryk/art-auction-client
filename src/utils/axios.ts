@@ -1,11 +1,7 @@
 import axios from 'axios';
 
-// import { showToast } from './index';
-// import { getAccessToken } from './localStorage';
-// import { DEFAULT_ERROR_MESSAGE } from './constants';
-
 const axiosInstance = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: import.meta.env.VITE_AUCTION_SERVICE_URL,
 });
 
 axiosInstance.interceptors.request.use((config) => {
@@ -21,7 +17,6 @@ axiosInstance.interceptors.response.use(
   (error) => {
     if (!axios.isCancel(error) && error.response?.status >= 500) {
       alert('Щось пішло не так. Спробуйте ще раз пізніше');
-      // showToast(DEFAULT_ERROR_MESSAGE, 'error');
     }
     return Promise.reject(error);
   },
