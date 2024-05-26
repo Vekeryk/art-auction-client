@@ -47,7 +47,7 @@ const LotPreviewModal: React.FC<ILotPreviewModal> = ({
                 <Box sx={{ width: '50%' }}>
                   <Gallery images={lot.images} />
                 </Box>
-                <LotDetails lot={lot} />
+                <LotDetails lot={lot} preview />
               </Stack>
             </Paper>
             <Paper>

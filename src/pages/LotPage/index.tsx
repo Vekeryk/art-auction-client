@@ -9,6 +9,7 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { fetchLot } from '../../helpers/requests.ts';
 import Loading from '../../components/layout/Loading';
+import { SocketProvider } from '../../context/SocketProvider';
 
 export const LotPage: React.FC = () => {
   const { lotId } = useParams();
@@ -23,18 +24,20 @@ export const LotPage: React.FC = () => {
   }
 
   return (
-    <Stack spacing={3}>
-      <Paper sx={{ padding: 2 }} elevation={2}>
-        <Stack direction="row" spacing={2} flexGrow={1}>
-          <Box sx={{ width: '50%' }}>
-            <Gallery images={lot.images} />
-          </Box>
-          <LotDetails lot={lot} />
-        </Stack>
-      </Paper>
-      <Paper>
-        <LotTabs lot={lot} />
-      </Paper>
-    </Stack>
+    <SocketProvider lot={lot}>
+      <Stack spacing={3}>
+        <Paper sx={{ padding: 2 }} elevation={2}>
+          <Stack direction="row" spacing={2} flexGrow={1}>
+            <Box sx={{ width: '50%' }}>
+              <Gallery images={lot.images} />
+            </Box>
+            <LotDetails lot={lot} />
+          </Stack>
+        </Paper>
+        <Paper>
+          <LotTabs lot={lot} />
+        </Paper>
+      </Stack>
+    </SocketProvider>
   );
 };

@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { io, Socket } from 'socket.io-client';
+import React from 'react';
 
 import { Button, Stack, TextField, Typography } from '@mui/material';
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
@@ -13,46 +12,21 @@ import IconContainer from '../../common/IconContainer';
 import { authenticatedAction } from '../../../utils/users.ts';
 import { Lot } from '../../../types.ts';
 import LotReportAction from '../LotReportAction';
+import useBidding from '../../../hooks/useBidding.ts';
 
 interface ILotDetails {
   lot: Lot;
+  preview?: boolean;
 }
 
-const LotDetails: React.FC<ILotDetails> = ({ lot }) => {
-  const [bidAmount, setBidAmount] = useState(lot.currentPrice + 20);
-  const connection = useRef<Socket | null>(null);
-
-  useEffect(() => {
-    if (!lot) {
-      return;
-    }
-    const socket = io(import.meta.env.VITE_BIDS_SERVICE_URL, {
-      query: { token: localStorage.getItem('token'), lotId: lot.id },
-    });
-
-    socket.on('bidUpdate', (updatedLot) => {
-      console.log(updatedLot);
-    });
-
-    socket.on('error', (message) => {
-      console.error('WebSocket Error:', message);
-    });
-
-    connection.current = socket;
-
-    return () => {
-      console.log('Closing websocket connection...');
-      socket.close();
-    };
-  }, [lot]);
-
-  const handlePlaceBid = () => {
-    console.log(connection.current);
-    connection.current?.emit('placeBid', {
-      lotId: lot.id,
-      amount: bidAmount,
-    });
-  };
+const LotDetails: React.FC<ILotDetails> = ({ lot, preview }) => {
+  const {
+    currentPrice,
+    userBidAmount,
+    setUserBidAmount,
+    handlePlaceBid,
+    usersCount,
+  } = useBidding(preview ? null : lot);
 
   return (
     <Stack spacing={2} flexGrow={1}>
@@ -63,7 +37,7 @@ const LotDetails: React.FC<ILotDetails> = ({ lot }) => {
           <IconContainer>
             <SellIcon />
             <Typography variant="h6">
-              Поточна ціна: {lot.currentPrice ?? lot.startingPrice} грн.
+              Поточна ціна: {currentPrice ?? lot.startingPrice} грн.
             </Typography>
           </IconContainer>
           <IconContainer>
@@ -71,17 +45,21 @@ const LotDetails: React.FC<ILotDetails> = ({ lot }) => {
             <Typography variant="h6">До завершення: </Typography>
             <Timer endTime={lot.endTime} />
           </IconContainer>
-          <IconContainer>
-            <GroupsIcon />
-            <Typography variant="h6">Стежить за лотом: 15 людей</Typography>
-          </IconContainer>
+          {usersCount && (
+            <IconContainer>
+              <GroupsIcon />
+              <Typography variant="h6">
+                Стежить за лотом: {usersCount} людей
+              </Typography>
+            </IconContainer>
+          )}
         </Stack>
         <Stack component="form" direction="row" spacing={2} width="100%">
           <TextField
             label="Ваша ставка"
             type="number"
-            value={bidAmount}
-            onChange={(e) => setBidAmount(+e.target.value)}
+            value={userBidAmount}
+            onChange={(e) => setUserBidAmount(+e.target.value)}
             InputProps={{
               inputProps: { min: lot.currentPrice, max: 100000000 },
             }}
