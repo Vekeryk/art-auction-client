@@ -9,6 +9,7 @@ export type ImagePreview = {
 };
 
 export type CurrentUser = {
+  id: string;
   username: string;
   firstName?: string;
   lastName?: string;
@@ -104,9 +105,12 @@ export type Lot = {
   id: string;
   title: string;
   description: string;
+  user: BaseUser;
+  leader: BaseUser | null;
   category: Category;
   tags: Tag[];
   images: LotImage[];
+  status: LotStatus;
   startingPrice: number;
   currentPrice: number;
   startTime: string;
@@ -198,4 +202,10 @@ export type LotComment = {
 export type Option = {
   value: string;
   label: string;
+};
+
+export type Notification = {
+  id: string;
+  message: string;
+  createdAt: string;
 };

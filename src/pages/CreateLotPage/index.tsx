@@ -15,6 +15,7 @@ import {
 import { DateTimePicker } from '@mui/x-date-pickers';
 import { Controller, useForm } from 'react-hook-form';
 import { useMutation } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 
 import PictureWall from '../../components/common/PictureWall';
 import CategorySelect from '../../components/common/CategorySelect';
@@ -27,6 +28,7 @@ import {
   DELIVERY_METHOD_OPTIONS,
   INPUT_PROPS,
   LOCATION_OPTIONS,
+  NAVIGATE_PATH,
   PAYMENT_METHOD_OPTIONS,
 } from '../../helpers/constants.ts';
 import {
@@ -41,6 +43,7 @@ import CheckboxInput from '../../components/common/CheckboxInput';
 import SelectInput from '../../components/common/SelectInput';
 
 export const CreateLotPage: React.FC = () => {
+  const navigate = useNavigate();
   const [lotImages, setLotImages] = useState<LotImage[]>([]);
   const [previewOpen, setPreviewOpen] = useState(false);
 
@@ -86,7 +89,9 @@ export const CreateLotPage: React.FC = () => {
       paymentMethods: Object.keys(data.paymentMethods) as PaymentMethod[],
       deliveryMethods: Object.keys(data.deliveryMethods) as DeliveryMethod[],
     };
-    createLotMutation.mutate(createLot);
+    createLotMutation.mutate(createLot, {
+      onSuccess: (lot) => navigate(NAVIGATE_PATH.lot(lot.id)),
+    });
   };
 
   return (

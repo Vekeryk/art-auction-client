@@ -7,7 +7,7 @@ const useBidding = (lot: Lot | null) => {
   const [usersCount, setUsersCount] = useState<number>();
   const [currentPrice, setCurrentPrice] = useState(lot?.currentPrice);
   const [userBidAmount, setUserBidAmount] = useState(
-    lot?.currentPrice ? lot.currentPrice + 10 : 1,
+    lot ? (lot.currentPrice ? lot.currentPrice : lot.startingPrice) + 10 : 1,
   );
 
   useEffect(() => {
