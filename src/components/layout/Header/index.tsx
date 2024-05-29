@@ -3,7 +3,6 @@ import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import {
   AppBar,
-  Badge,
   Box,
   Breadcrumbs,
   Button,
@@ -15,9 +14,9 @@ import {
 } from '@mui/material';
 import { DarkModeOutlined, LightMode } from '@mui/icons-material';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import MenuIcon from '@mui/icons-material/Menu';
 
+import NotificationsMenu from '../../common/NotificationMenu';
 import useAppSelector from '../../../hooks/useAppSelector.ts';
 import useAppDispatch from '../../../hooks/useAppDispatch.ts';
 import { toggleTheme } from '../../../store/reducers/uiSlice.ts';
@@ -67,15 +66,7 @@ const Header: React.FC<IHeader> = () => {
             >
               <AccountCircle />
             </IconButton>
-            <IconButton
-              size="large"
-              aria-label="17 notifications"
-              color="inherit"
-            >
-              <Badge badgeContent={17} color="error">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            <NotificationsMenu />
           </Stack>
         ) : (
           <Breadcrumbs sx={{ marginX: 2, color: 'white', cursor: 'pointer' }}>

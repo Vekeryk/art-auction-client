@@ -6,6 +6,7 @@ import {
   Lot,
   LotComment,
   LotImage,
+  Notification,
   PageableLots,
   SearchLotsQuery,
   Tag,
@@ -65,4 +66,13 @@ export const uploadImage = async (file: File) => {
     },
   });
   return response.data;
+};
+
+export const fetchNotifications = async () => {
+  const { data } = await axiosInstance.get<Notification[]>('notifications');
+  return data;
+};
+
+export const readNotifications = async () => {
+  await axiosInstance.post('notifications/read');
 };

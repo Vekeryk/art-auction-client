@@ -8,6 +8,7 @@ import {
   CircularProgress,
   Pagination,
   Stack,
+  TextField,
   Typography,
 } from '@mui/material';
 import SellIcon from '@mui/icons-material/Sell';
@@ -25,6 +26,7 @@ import SelectInput from '../../components/common/SelectInput';
 import { SearchLotsFormValues, SearchLotsQuery } from '../../types.ts';
 import {
   ELLIPSIS_STYLES,
+  INPUT_PROPS,
   LOCATION_OPTIONS,
   NAVIGATE_PATH,
 } from '../../helpers/constants.ts';
@@ -74,6 +76,13 @@ export const LotsSearchPage: React.FC = () => {
           control={control}
           options={LOCATION_OPTIONS}
           clearOption
+        />
+        <TextField
+          type="number"
+          label="Стартова ціна (грн.)"
+          InputProps={{ inputProps: { min: 1, max: 100000000 } }}
+          required
+          {...INPUT_PROPS}
         />
       </Stack>
       <Stack gap={4} flexGrow={1}>
