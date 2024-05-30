@@ -10,20 +10,27 @@ import {
   Stack,
 } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 
-import { fetchNotifications } from '../../../helpers/requests.ts';
+import {
+  fetchNotifications,
+  readNotifications,
+} from '../../../helpers/requests.ts';
 import { toDateTimeString } from '../../../utils/dates.ts';
 
 const NotificationsMenu: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
-  const { data: notifications, isLoading } = useQuery(
+  const { data: notifications, refetch } = useQuery(
     ['notifications'],
     fetchNotifications,
     { refetchInterval: 60000 }, // update every minute
   );
+
+  const readNotificationsMutation = useMutation(() => {
+    return readNotifications();
+  });
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -33,13 +40,16 @@ const NotificationsMenu: React.FC = () => {
     setAnchorEl(null);
   };
 
-  const handleMarkAllAsRead = () => {
-    // TODO: read notifications
-    console.log('Всі повідомлення відзначені як прочитані');
-    handleClose();
+  const handleReadNotifications = () => {
+    readNotificationsMutation.mutate(undefined, {
+      onSuccess: () => {
+        handleClose();
+        refetch();
+      },
+    });
   };
 
-  if (isLoading || !notifications) {
+  if (!notifications?.length) {
     return null;
   }
 
@@ -71,7 +81,7 @@ const NotificationsMenu: React.FC = () => {
         }}
       >
         <List sx={{ maxHeight: 200, overflowY: 'auto' }}>
-          {notifications?.map((notification) => (
+          {notifications.map((notification) => (
             <ListItem key={notification.id} divider>
               <ListItemText
                 primary={notification.message}
@@ -83,7 +93,7 @@ const NotificationsMenu: React.FC = () => {
         </List>
         <Stack justifyContent="center" alignItems="center">
           <Button
-            onClick={handleMarkAllAsRead}
+            onClick={handleReadNotifications}
             variant="contained"
             color="primary"
           >

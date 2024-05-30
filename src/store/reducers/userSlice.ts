@@ -19,6 +19,9 @@ export const userSlice = createSlice({
       state.loading = false;
       console.log(action.payload);
       state.user = action.payload;
+      if (state.user) {
+        state.user.profilePicture = 'default.jpg';
+      }
     },
   },
 });

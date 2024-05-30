@@ -4,3 +4,6 @@ export { LotsSearchPage } from './LotsSearchPage';
 export { CreateLotPage } from './CreateLotPage';
 export { AboutPage } from './AboutPage';
 export { ProtectedPage } from './ProtectedPage';
+export { UserLotsPage } from './UserLotsPage';
+export { MessagesPage } from './MessagesPage';
+export { DialogPage } from './DialogPage';

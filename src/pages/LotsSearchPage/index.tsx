@@ -1,37 +1,23 @@
 import React, { useState } from 'react';
 
 import {
-  Card,
-  CardActionArea,
-  CardContent,
-  CardMedia,
   CircularProgress,
   Pagination,
   Stack,
   TextField,
   Typography,
 } from '@mui/material';
-import SellIcon from '@mui/icons-material/Sell';
-import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 import { useQuery } from 'react-query';
 import { useForm } from 'react-hook-form';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-import CategoryAndTags from '../../components/common/CategoryAndTags';
 import CategorySelect from '../../components/common/CategorySelect';
-import IconContainer from '../../components/common/IconContainer';
 import TagsAutocomplete from '../../components/common/TagsAutocomplete';
-import Timer from '../../components/common/Timer';
 import SelectInput from '../../components/common/SelectInput';
+import LotCard from '../../components/common/LotCard';
 import { SearchLotsFormValues, SearchLotsQuery } from '../../types.ts';
-import {
-  ELLIPSIS_STYLES,
-  INPUT_PROPS,
-  LOCATION_OPTIONS,
-  NAVIGATE_PATH,
-} from '../../helpers/constants.ts';
+import { INPUT_PROPS, LOCATION_OPTIONS } from '../../helpers/constants.ts';
 import { fetchFilteredLots } from '../../helpers/requests.ts';
-import { getPicturePath } from '../../utils/lots.ts';
 
 export const LotsSearchPage: React.FC = () => {
   const location = useLocation();
@@ -85,7 +71,7 @@ export const LotsSearchPage: React.FC = () => {
           {...INPUT_PROPS}
         />
       </Stack>
-      <Stack gap={4} flexGrow={1}>
+      <Stack gap={2} flexGrow={1}>
         {isLoading && (
           <CircularProgress size={80} sx={{ alignSelf: 'center' }} />
         )}
@@ -94,47 +80,7 @@ export const LotsSearchPage: React.FC = () => {
             Лотів не знайдено.
           </Typography>
         )}
-        {pageableLots?.lots.map((lot) => (
-          <Card sx={{ height: '100%' }} key={lot.id}>
-            <CardActionArea
-              component={Link}
-              to={NAVIGATE_PATH.lot(lot.id)}
-              sx={{ height: '100%', display: 'flex', userSelect: 'text' }}
-            >
-              <CardMedia
-                component="img"
-                sx={{
-                  width: { xs: 100, md: 250 },
-                  height: { xs: 100, md: 250 },
-                  objectFit: 'contain',
-                  backgroundColor: 'gray',
-                }}
-                image={getPicturePath(lot.images[0].image)}
-                alt={lot.title}
-              />
-              <CardContent sx={{ height: '100%', flexGrow: 1 }}>
-                <Typography variant="h5" marginBottom={1}>
-                  {lot.title}
-                </Typography>
-                <CategoryAndTags category={lot.category} tags={lot.tags} />
-                <IconContainer>
-                  <SellIcon />
-                  <Typography variant="h6">
-                    Поточна ціна: {lot.currentPrice ?? lot.startingPrice} грн.
-                  </Typography>
-                </IconContainer>
-                <IconContainer>
-                  <HourglassBottomIcon />
-                  <Typography variant="h6">До завершення: </Typography>
-                  <Timer endTime={lot.endTime} />
-                </IconContainer>
-                <Typography sx={{ ...ELLIPSIS_STYLES, WebkitLineClamp: '4' }}>
-                  {lot.description}
-                </Typography>
-              </CardContent>
-            </CardActionArea>
-          </Card>
-        ))}
+        {pageableLots?.lots.map((lot) => <LotCard key={lot.id} lot={lot} />)}
         {!!pageableLots?.lots.length && (
           <Pagination
             sx={{ alignSelf: 'center' }}

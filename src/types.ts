@@ -13,7 +13,8 @@ export type CurrentUser = {
   username: string;
   firstName?: string;
   lastName?: string;
-  profilePictureUrl?: string;
+  rating: number;
+  profilePicture?: string;
 };
 
 export type BaseUser = {
@@ -23,7 +24,6 @@ export type BaseUser = {
   lastName?: string;
   rating: number;
   profilePicture?: string;
-  createdAt: string;
 };
 
 export type TimeLeft = {
@@ -208,4 +208,25 @@ export type Notification = {
   id: string;
   message: string;
   createdAt: string;
+};
+
+export type Message = {
+  id: string;
+  message: string;
+  sender: BaseUser;
+  receiver: BaseUser;
+  createdAt: string;
+};
+
+export type RawMessage = {
+  id: string;
+  message: string;
+  senderId: string;
+  receiverId: string;
+  createdAt: string;
+};
+
+export type Dialog = {
+  person: BaseUser;
+  messages: RawMessage[];
 };

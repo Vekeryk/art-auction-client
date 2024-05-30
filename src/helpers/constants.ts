@@ -7,6 +7,9 @@ export const NAVIGATE_PATH = {
   search: '/search',
   createLot: '/create-lot',
   about: '/about',
+  messages: '/messages',
+  myLots: '/my-lots',
+  dialog: (personId: string) => `/dialog/${personId}`,
   any: '*',
 };
 

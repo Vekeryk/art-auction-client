@@ -5,6 +5,7 @@ import {
   Location,
   Lot,
   LotImage,
+  LotStatus,
   PaymentMethod,
 } from '../types.ts';
 import { addDays } from 'date-fns';
@@ -13,7 +14,8 @@ export const getEnumValues = <T extends object>(someEnum: T) => {
   return Object.keys(someEnum).filter((k) => isNaN(Number(k)));
 };
 
-export const getPicturePath = (fileName: string) => {
+export const getPicturePath = (fileName?: string) => {
+  if (!fileName) return undefined;
   return `${import.meta.env.VITE_AUCTION_SERVICE_URL}/uploads/${fileName}`;
 };
 
@@ -26,6 +28,13 @@ export const getPreviewLot = (
     id: 'lot_id',
     title: lotValues.title || 'Ваша назва',
     description: lotValues.description || 'Ваш опис',
+    user: {
+      id: '1',
+      username: 'username',
+      rating: 10,
+    },
+    leader: null,
+    status: LotStatus.ACTIVE,
     category: lotValues.category || {
       id: 'category_id',
       name: 'Ваша категорія',

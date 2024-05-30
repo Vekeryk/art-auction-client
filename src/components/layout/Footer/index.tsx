@@ -7,7 +7,12 @@ const Footer: React.FC = () => {
     <Box component="footer" sx={{ py: 6, mt: 'auto' }}>
       <Container maxWidth="lg">
         <Grid container justifyContent="center">
-          <Grid item xs={12} sm={4}>
+          <Grid
+            item
+            xs={12}
+            sm={4}
+            sx={{ display: { xs: 'none', md: 'grid' } }}
+          >
             <Typography variant="h6" color="text.primary" gutterBottom>
               Навігація
             </Typography>
@@ -60,7 +65,13 @@ const Footer: React.FC = () => {
               Контактна форма
             </Link>
           </Grid>
-          <Grid item xs={12} sm={4} textAlign="right">
+          <Grid
+            item
+            xs={12}
+            sm={4}
+            textAlign="right"
+            sx={{ display: { xs: 'none', md: 'grid' } }}
+          >
             <Typography variant="h6" color="text.primary" gutterBottom>
               Соціальні мережі
             </Typography>

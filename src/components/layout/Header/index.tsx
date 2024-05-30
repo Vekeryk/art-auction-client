@@ -52,7 +52,13 @@ const Header: React.FC<IHeader> = () => {
             Про нас
           </Button>
           <Button color="inherit" component={RouterLink} to={PATH.lots}>
-            Лоти
+            Пошук
+          </Button>
+          <Button color="inherit" component={RouterLink} to={PATH.myLots}>
+            Мої лоти
+          </Button>
+          <Button color="inherit" component={RouterLink} to={PATH.messages}>
+            Повідомлення
           </Button>
         </Box>
         {user ? (

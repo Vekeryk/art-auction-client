@@ -14,6 +14,9 @@ import {
   AboutPage,
   ProtectedPage,
   LotsSearchPage,
+  UserLotsPage,
+  MessagesPage,
+  DialogPage,
 } from './index.ts';
 import { NAVIGATE_PATH as PATH } from '../helpers/constants.ts';
 
@@ -26,6 +29,9 @@ const router = createBrowserRouter(
       <Route path={PATH.lots} element={<LotsSearchPage />} />
       <Route element={<ProtectedPage />}>
         <Route path={PATH.createLot} element={<CreateLotPage />} />
+        <Route path={PATH.myLots} element={<UserLotsPage />} />
+        <Route path={PATH.messages} element={<MessagesPage />} />
+        <Route path={PATH.dialog(':personId')} element={<DialogPage />} />
       </Route>
       <Route path={PATH.any} element={<Navigate to={PATH.home} />} />
     </Route>,

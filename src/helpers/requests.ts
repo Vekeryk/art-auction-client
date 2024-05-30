@@ -3,9 +3,11 @@ import {
   Category,
   CreateComment,
   CreateLot,
+  Dialog,
   Lot,
   LotComment,
   LotImage,
+  Message,
   Notification,
   PageableLots,
   SearchLotsQuery,
@@ -25,6 +27,11 @@ export const fetchLot = async (id?: string) => {
 export const fetchRecentLots = async () => {
   const response = await axiosInstance.get<PageableLots>(`lots`);
   return response.data.lots;
+};
+
+export const fetchUserLots = async (userId: string) => {
+  const response = await axiosInstance.get<Lot[]>(`lots/user/${userId}`);
+  return response.data;
 };
 
 export const searchLotsByTitle = async (title: string) => {
@@ -75,4 +82,22 @@ export const fetchNotifications = async () => {
 
 export const readNotifications = async () => {
   await axiosInstance.post('notifications/read');
+};
+
+export const fetchDialogs = async () => {
+  const { data } = await axiosInstance.get<Message[]>(`messages`);
+  return data;
+};
+
+export const fetchDialogMessages = async (personId?: string) => {
+  const { data } = await axiosInstance.get<Dialog>(`messages/user/${personId}`);
+  return data;
+};
+
+export const sendMessage = async (message: string, receiverId?: string) => {
+  const { data } = await axiosInstance.post('messages', {
+    message,
+    receiverId,
+  });
+  return data;
 };
