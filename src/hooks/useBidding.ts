@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Bid, Lot } from '../types.ts';
+import { EnrichedBid, Lot } from '../types.ts';
 import { useSocketContext } from './useSocketContext.ts';
 
 const useBidding = (lot: Lot | null) => {
@@ -13,7 +13,7 @@ const useBidding = (lot: Lot | null) => {
   useEffect(() => {
     if (!socket) return;
 
-    socket.on('bidUpdate', (newBid: Bid) => {
+    socket.on('bidUpdate', (newBid: EnrichedBid) => {
       console.log('bidUpdate', newBid);
       setCurrentPrice(newBid.amount);
       setUserBidAmount(newBid.amount + 20);

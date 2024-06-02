@@ -1,4 +1,10 @@
-import React, { createContext, ReactNode, useEffect, useRef } from 'react';
+import React, {
+  createContext,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { io, Socket } from 'socket.io-client';
 import { Lot } from '../../types.ts';
 
@@ -20,14 +26,16 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({
   lot,
 }) => {
   const socketRef = useRef<Socket | null>(null);
+  const [, setIsReady] = useState(false);
 
   useEffect(() => {
     if (!lot) return;
 
-    const socket = io(import.meta.env.VITE_BIDS_SERVICE_URL, {
+    const socket = io(import.meta.env.VITE_BIDS_SERVICE_HOST, {
       query: { token: localStorage.getItem('token'), lotId: lot.id },
-      path: '/bids-service',
+      path: '/bids-service/ws',
     });
+    setIsReady(true);
     socketRef.current = socket;
 
     socket.on('error', (message) => {

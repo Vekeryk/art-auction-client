@@ -7,12 +7,18 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { Routes } from './pages/Routes.tsx';
 import useTheme from './hooks/useTheme';
 import useAuth from './hooks/useAuth.ts';
+import useAppSelector from './hooks/useAppSelector.ts';
 
 const queryClient = new QueryClient();
 
 const App = () => {
+  const loading = useAppSelector((state) => state.userReducer.loading);
   const theme = useTheme();
   useAuth();
+
+  if (loading) {
+    return null;
+  }
 
   return (
     <ThemeProvider theme={theme}>

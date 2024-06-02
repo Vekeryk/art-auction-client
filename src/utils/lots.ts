@@ -16,7 +16,7 @@ export const getEnumValues = <T extends object>(someEnum: T) => {
 
 export const getPicturePath = (fileName?: string) => {
   if (!fileName) return undefined;
-  return `${import.meta.env.VITE_AUCTION_SERVICE_URL}/uploads/${fileName}`;
+  return `${import.meta.env.VITE_AUCTION_SERVICE_API_URL}/uploads/${fileName}`;
 };
 
 export const getPreviewLot = (

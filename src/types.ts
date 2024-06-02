@@ -188,6 +188,13 @@ export type CreateComment = {
 export type Bid = {
   id: string;
   amount: number;
+  userId: string;
+  createdAt: string;
+};
+
+export type EnrichedBid = {
+  id: string;
+  amount: number;
   user: BaseUser;
   createdAt: string;
 };

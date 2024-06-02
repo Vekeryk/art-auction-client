@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_AUCTION_SERVICE_URL,
+const auctionAxios = axios.create({
+  baseURL: import.meta.env.VITE_AUCTION_SERVICE_API_URL,
 });
 
-axiosInstance.interceptors.request.use((config) => {
+auctionAxios.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -12,7 +12,7 @@ axiosInstance.interceptors.request.use((config) => {
   return config;
 });
 
-axiosInstance.interceptors.response.use(
+auctionAxios.interceptors.response.use(
   (response) => response,
   (error) => {
     if (!axios.isCancel(error) && error.response?.status >= 500) {
@@ -22,4 +22,4 @@ axiosInstance.interceptors.response.use(
   },
 );
 
-export default axiosInstance;
+export default auctionAxios;
