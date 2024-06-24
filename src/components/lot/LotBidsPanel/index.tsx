@@ -30,22 +30,20 @@ const LotBidsPanel: React.FC<ILotBidsPanel> = ({
 }) => {
   const { socket } = useSocketContext();
 
+  const [bids, setBids] = useState<EnrichedBid[]>();
+  const { data: initialBids, refetch } = useQuery(['bids', lotId], () =>
+    fetchBids(lotId),
+  );
+
   useEffect(() => {
     if (!socket) return;
 
-    socket.on('bidUpdate', (newBid: EnrichedBid) => {
-      setBids((prevBids) => (prevBids ? [newBid, ...prevBids] : [newBid]));
-    });
+    socket.on('bidUpdate', () => refetch());
 
     return () => {
       socket.off('bidUpdate');
     };
-  }, [socket]);
-
-  const [bids, setBids] = useState<EnrichedBid[]>();
-  const { data: initialBids } = useQuery(['bids', lotId], () =>
-    fetchBids(lotId),
-  );
+  }, [socket, refetch]);
 
   const userIds = initialBids
     ? [...new Set(initialBids?.map((bid) => bid.userId))]

@@ -25,7 +25,7 @@ const NotificationsMenu: React.FC = () => {
   const { data: notifications, refetch } = useQuery(
     ['notifications'],
     fetchNotifications,
-    { refetchInterval: 60000 }, // update every minute
+    { refetchInterval: 3000 }, // update every 3 seconds
   );
 
   const readNotificationsMutation = useMutation(() => {

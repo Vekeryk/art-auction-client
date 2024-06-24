@@ -34,6 +34,8 @@ export const SocketProvider: React.FC<SocketProviderProps> = ({
     const socket = io(import.meta.env.VITE_BIDS_SERVICE_HOST, {
       query: { token: localStorage.getItem('token'), lotId: lot.id },
       path: '/bids-service/ws',
+      reconnection: true,
+      autoConnect: true,
     });
     setIsReady(true);
     socketRef.current = socket;

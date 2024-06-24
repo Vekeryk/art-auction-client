@@ -13,7 +13,6 @@ import {
   Typography,
 } from '@mui/material';
 import { DarkModeOutlined, LightMode } from '@mui/icons-material';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import NotificationsMenu from '../../common/NotificationMenu';
@@ -22,6 +21,7 @@ import useAppDispatch from '../../../hooks/useAppDispatch.ts';
 import { toggleTheme } from '../../../store/reducers/uiSlice.ts';
 import keycloak from '../../../utils/keycloak.ts';
 import { NAVIGATE_PATH as PATH } from '../../../helpers/constants.ts';
+import UserProfileMenu from '../../common/UserProfileMenu';
 
 interface IHeader {}
 
@@ -63,15 +63,7 @@ const Header: React.FC<IHeader> = () => {
         </Box>
         {user ? (
           <Stack direction="row">
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account"
-              aria-haspopup="true"
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
+            <UserProfileMenu user={user} />
             <NotificationsMenu />
           </Stack>
         ) : (
